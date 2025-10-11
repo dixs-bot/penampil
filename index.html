@@ -83,6 +83,43 @@
     .bank-logos{display:flex;gap:18px;justify-content:center;margin-top:12px}
     .bank-logos img{width:120px;border-radius:8px;background:#fafafa;padding:8px}
 
+    /* ongkir */
+    .ongkir {
+      margin: 30px 0;
+    }
+    .ongkir input[type=number] {
+      padding: 10px;
+      width: 120px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+    .ongkir button {
+      background: var(--primary);
+      color: #fff;
+      padding: 10px 14px;
+      border: none;
+      border-radius: 8px;
+      margin-left: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .ongkir p {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-top: 16px;
+    }
+    .ongkir .info {
+      font-size:0.95rem;
+      line-height:1.6;
+      color:#444;
+      background:#fff8f0;
+      padding:10px 14px;
+      border-radius:8px;
+      margin-bottom:18px;
+      text-align:left;
+    }
+
     /* cart floating */
     .cart-float{
       position:fixed;right:18px;top:18px;width:56px;height:56px;background:#fff;border-radius:12px;box-shadow:0 6px 16px rgba(0,0,0,0.18);
@@ -110,13 +147,61 @@
     @media (max-width:520px){
       .cart-panel{right:8px;left:8px;width:auto;top:auto;bottom:16px;max-height:60vh}
     }
+
+    /* modal style for checkout */
+    .modal {
+      display: none; 
+      position: fixed; 
+      z-index: 10000;
+      left: 0;
+      top: 0;
+      width: 100%; 
+      height: 100%; 
+      overflow: auto; 
+      background-color: rgba(0,0,0,0.4); 
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: 15% auto; 
+      padding: 20px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    }
+    .close-button {
+      color: #aaa;
+      float: right;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close-button:hover {
+      color: #000;
+    }
+    #paymentForm label {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    #paymentForm button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    #paymentForm button:hover {
+      background: #e64a19;
+    }
   </style>
 </head>
 <body>
 
 <header>
   <div class="brand">
-    <img class="logo" src="images/placeholder_menu.jpg" alt="Logo Cilok">
+    <img class="logo" src="logocilok.png" alt="Logo Cilok">
     <div>
       <h1>Cilok Goang Teh Desi</h1>
       <p>Rasa Juara, Pedasnya Bikin Nagih!</p>
@@ -144,6 +229,7 @@
     </div>
   </section>
 
+  <!-- Download -->
   <div class="download">
     <a class="btn-download" href="menu.pdf" download>📥 Download Menu (PDF)</a>
   </div>
@@ -158,6 +244,7 @@
     </div>
   </section>
 
+  <!-- QRIS & Bank -->
   <section class="qris">
     <h2 style="color:var(--primary)">Metode Pembayaran</h2>
     <p>Scan QRIS atau transfer melalui bank</p>
@@ -167,6 +254,25 @@
       <img src="bca.png" alt="BCA">
       <img src="bni.png" alt="BNI">
     </div>
+  </section>
+
+  <!-- Ongkir -->
+  <section class="ongkir">
+    <h2 style="color:var(--primary)">Cek Ongkir Pengantaran</h2>
+
+    <p class="info">
+      💡 <b>Cara cek jarak:</b><br>
+      1️⃣ Buka aplikasi <b>Google Maps</b> atau <b>Waze</b>.<br>
+      2️⃣ Ketik <b>"Cilok Goang Teh Desi"</b> di kolom pencarian.<br>
+      3️⃣ Pilih menu <b>Rute</b> dan masukkan alamat rumah kamu.<br>
+      4️⃣ Lihat jarak dalam satuan <b>km</b> dari rumah ke gerai.<br><br>
+      Setelah tahu jaraknya, masukkan angkanya di kolom cek ongkir untuk menghitung ongkir otomatis 🚚
+    </p>
+
+    <p>Masukkan jarak dari lokasi kami (km):</p>
+    <input id="jarakInput" type="number" placeholder="contoh: 6" min="0">
+    <button onclick="hitungOngkir()">Hitung</button>
+    <p id="hasilOngkir"></p>
   </section>
 </div>
 
@@ -187,13 +293,27 @@
   </div>
 </div>
 
+<!-- Modal Checkout -->
+<div id="checkoutModal" class="modal">
+  <div class="modal-content">
+    <span class="close-button" id="modalClose">&times;</span>
+    <h3>Pilih Metode Pembayaran</h3>
+    <form id="paymentForm">
+      <label><input type="radio" name="paymentMethod" value="Transfer" checked> Transfer Bank</label><br>
+      <label><input type="radio" name="paymentMethod" value="QRIS"> QRIS</label><br><br>
+      <div id="paymentInfo" style="margin-top:12px;"></div>
+      <button type="submit">Konfirmasi Pembayaran</button>
+    </form>
+  </div>
+</div>
+
 <!-- Floating WhatsApp contact -->
 <a class="whatsapp-float" href="https://wa.me/6281212629516" target="_blank" title="Chat Teh Desi">
   <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA" style="width:50px;height:50px">
 </a>
 
 <script>
-/* ===== DATA MENU (ubah/expand sesuai kebutuhan) ===== */
+/* ===== DATA MENU ===== */
 const MENU = [
   { id: 'm1', name: 'Paket Hemat 1', price: 27000, img:'images/placeholder_menu.jpg' },
   { id: 'm2', name: 'Paket Hemat 2', price: 27000, img:'images/placeholder_menu.jpg' },
@@ -231,22 +351,10 @@ const MENU = [
   { id: 'm34', name: 'Cireng Bajur Mantul', price: 14000, img:'images/placeholder_menu.jpg' },
   { id: 'm35', name: 'Cilok Goang INSTAN KOMPLIT', price: 17000, img:'images/placeholder_menu.jpg' },
   { id: 'm36', name: 'Cilik GOANG Sambal Ijo', price: 15000, img:'images/placeholder_menu.jpg' },
-  { id: 'm37', name: 'Cilik GOANG Sambal Ijo', price: 15000, img:'images/placeholder_menu.jpg' },
-  { id: 'm38', name: 'Cilik GOANG Sambal Ijo', price: 15000, img:'images/placeholder_menu.jpg' },
-  { id: 'm39', name: 'Cilik GOANG Sambal Ijo', price: 15000, img:'images/placeholder_menu.jpg' },
-  { id: 'm40', name: 'Cilik GOANG Sambal Ijo', price: 15000, img:'images/placeholder_menu.jpg' },
-  { id: 'm41', name: 'Cilik GOANG Sambal Ijo', price: 15000, img:'images/placeholder_menu.jpg' },
-  { id: 'm42', name: 'Makroni Ngoonah Pedes Sedang', price: 8000, img:'images/placeholder_menu.jpg' },
-  { id: 'm43', name: 'Makroni Ngoonah Pedes Banget', price: 8000, img:'images/placeholder_menu.jpg' },
-  { id: 'm44', name: 'Makroni Ngoonah ORIGINAL', price: 8000, img:'images/placeholder_menu.jpg' },
-  { id: 'm45', name: 'jUS jeruk Peras', price: 12000, img:'images/placeholder_menu.jpg' },
-  { id: 'm46', name: 'Es Lemon Tea', price: 12000, img:'images/placeholder_menu.jpg' },
-  { id: 'm47', name: 'Capuchino Cincau', price: 12000, img:'images/placeholder_menu.jpg' },
-  { id: 'm48', name: 'Thai Teaa', price: 12000, img:'images/placeholder_menu.jpg' },
-  { id: 'm49', name: 'Green Tea', price: 12000, img:'images/placeholder_menu.jpg' }
+  { id: 'm37', name: 'Cilik GOANG Sambal Ijo', price: 15000, img:'images/placeholder_menu.jpg' },...
 ];
 
-/* ===== STATE KERANJANG (disimpan di localStorage supaya bertahan reload) ===== */
+/* ===== STATE KERANJANG ===== */
 let cart = JSON.parse(localStorage.getItem('cg_cart')||'[]');
 
 /* ===== HELPERS ===== */
@@ -284,7 +392,7 @@ function addToCart(id){
   else cart.push({ id:menuItem.id, name:menuItem.name, price:menuItem.price, qty:1 });
   saveCart();
   renderCartPanel();
-  showCartPanel(); // buka panel supaya user lihat
+  showCartPanel();
 }
 
 /* ===== RENDER CART COUNT ===== */
@@ -362,17 +470,69 @@ document.getElementById('clearCart').addEventListener('click', function(){
   if(confirm('Kosongkan keranjang?')){ cart = []; saveCart(); renderCartPanel(); cartPanel.style.display='none'; }
 });
 
-/* ===== CHECKOUT VIA WHATSAPP (Opsi A: langsung WA) ===== */
-document.getElementById('checkoutBtn').addEventListener('click', function(){
-  if(cart.length === 0){ alert('Keranjang kosong — tambahkan menu dulu.'); return; }
-  let pesan = 'Halo Teh Desi%0A%0ASaya mau pesan:%0A';
+/* ===== CHECKOUT VIA WHATSAPP ===== */
+const checkoutBtn = document.getElementById('checkoutBtn');
+const modal = document.getElementById('checkoutModal');
+const closeModalBtn = document.getElementById('modalClose');
+const paymentForm = document.getElementById('paymentForm');
+const paymentInfoDiv = document.getElementById('paymentInfo');
+
+checkoutBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  if(cart.length === 0) {
+    alert('Keranjang kosong — tambahkan menu dulu.');
+    return;
+  }
+  modal.style.display = 'block';
+  updatePaymentInfo();
+});
+
+function updatePaymentInfo(){
+  const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+  if(paymentMethod === 'Transfer'){
+    paymentInfoDiv.innerHTML = `
+      <p>Transfer ke Rekening BCA:</p>
+      <p><strong>1390997651</strong> a/n Desirusmianti</p>
+    `;
+  } else if(paymentMethod === 'QRIS'){
+    paymentInfoDiv.innerHTML = `
+      <p>Scan QRIS di bawah ini untuk pembayaran:</p>
+      <img src="qris-cilokgoang.jpg" alt="QRIS Cilok Goang" style="width:220px; border-radius:8px;"/>
+    `;
+  } else {
+    paymentInfoDiv.innerHTML = '';
+  }
+}
+
+// Update info ketika pilihan payment berubah
+paymentForm.querySelectorAll('input[name="paymentMethod"]').forEach(radio=>{
+  radio.addEventListener('change', updatePaymentInfo);
+});
+
+closeModalBtn.addEventListener('click', () => {
+  modal.style.display = 'none';
+});
+
+window.addEventListener('click', (event) => {
+  if(event.target === modal){
+    modal.style.display = 'none';
+  }
+});
+
+paymentForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+  alert(`Pembayaran dipilih: ${paymentMethod}\nTerima kasih atas pesanannya!`);
+  modal.style.display = 'none';
+
+  let pesan = `Halo Teh Desi\n\nSaya mau pesan:\n`;
   let total = 0;
   cart.forEach(it=>{
     const sub = it.price * it.qty;
     total += sub;
-    pesan += `- ${it.name} x${it.qty} = ${rupiah(it.price * it.qty)}%0A`;
+    pesan += `- ${it.name} x${it.qty} = Rp${sub.toLocaleString('id-ID')}\n`;
   });
-  pesan += `%0ATotal: ${rupiah(total)}%0A%0AAlamat / catatan: `;
+  pesan += `\nTotal: Rp${total.toLocaleString('id-ID')}\n\nMetode Pembayaran: ${paymentMethod}\nAlamat / catatan: `;
   const wa = 'https://wa.me/6281212629516?text=' + encodeURIComponent(pesan);
   window.open(wa, '_blank');
 
@@ -380,11 +540,7 @@ document.getElementById('checkoutBtn').addEventListener('click', function(){
   saveCart();
   renderCartPanel();
   cartPanel.style.display = 'none';
-  alert('Pesanan dibuka di WhatsApp. Silakan kirim pesanan melalui chat.');
 });
-
-/* ===== Inisialisasi render (panggil saat load) ===== */
-renderCartPanel();
 </script>
 </body>
 </html>
