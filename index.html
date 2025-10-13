@@ -8,34 +8,11 @@
   <meta name="keywords" content="cilok cimahi, cilok pedas, cilok goang, teh desi, seblak, gofood, shopeefood, grabfood" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://dixs-bot.github.io/Vmenu/" />
-  <!-- Open Graph -->
   <meta property="og:title" content="Cilok Goang Teh Desi Cimahi" />
   <meta property="og:description" content="Rasa Juara, Pedasnya Bikin Nagih! Pesan online via Shopee, GoFood, Grab atau WA." />
   <meta property="og:image" content="images/logocilok.png" />
   <meta property="og:url" content="https://dixs-bot.github.io/Vmenu/" />
   <meta property="og:type" content="restaurant" />
-
-  <!-- JSON-LD Restaurant -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Restaurant",
-    "name": "Cilok Goang Teh Desi",
-    "image": "https://dixs-bot.github.io/Vmenu/logocilok.png",
-    "url": "https://dixs-bot.github.io/Vmenu/",
-    "telephone": "+6281212629516",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Wisma Agung Jl KH Usman Dhomiri RT 02 RW 17, Kel. Padasuka",
-      "addressLocality": "Cimahi",
-      "addressRegion": "Jawa Barat",
-      "postalCode": "40526",
-      "addressCountry": "ID"
-    },
-    "openingHours": "Mo-Su 09:00-24:00",
-    "servesCuisine": ["Cilok","Seblak","Street Food"]
-  }
-  </script>
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
@@ -63,7 +40,6 @@
     .card button{background:var(--primary);color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:700}
     .card button:hover{background:#e64a19}
     .platforms{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:18px 0}
-    .platforms a{display:inline-flex;align-items:center;gap:10px;padding:8px 12px;border-radius:10px;text-decoration:none;color:inherit}
     .platforms img{width:120px;border-radius:10px;box-shadow:0 6px 16px rgba(0,0,0,0.08)}
     .cart-float{position:fixed;right:18px;top:18px;width:76px;height:76px;background:#fff;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.18);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:999}
     .cart-float .badge{position:absolute;top:-6px;right:-6px;background:var(--primary);color:#fff;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px}
@@ -89,14 +65,82 @@
     .ship-grab{background:#00b14f;color:#fff}
     .ship-pickup{background:#6b7280;color:#fff}
     .footer-note{font-size:0.95rem;color:var(--muted);margin-top:10px}
-    @media(max-width:520px){ .cart-panel{right:8px;left:8px;width:auto;top:auto;bottom:16px} .form-row {flex-direction:column;align-items:stretch} }
+
+    /* tombol kado: posisikan tepat di bawah cart-float (top: 110px keeps it under the cart button) */
+    .gift-btn {
+      position: fixed;
+      right: 18px;
+      top: 110px; /* berada di bawah cart-float yang berada di top:18 (cart panel opening starts at 110) */
+      background:#ff7043;
+      color:#fff;
+      border:none;
+      padding:10px 12px;
+      border-radius:16px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.18);
+      cursor:pointer;
+      font-weight:800;
+      z-index:999;
+      text-align:center;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    @media(max-width:520px){
+      .cart-panel{right:8px;left:8px;width:auto;top:auto;bottom:16px}
+      .gift-btn{right:12px; top: 100px}
+      .form-row {flex-direction:column;align-items:stretch}
+    }
+    .gift-popup {
+  display:none;
+  position:fixed;
+  left:0; top:0; width:100%; height:100%;
+  background:rgba(0,0,0,0.55);
+  z-index:10000;
+  animation:fadeIn 0.3s ease;
+}
+.gift-popup-content {
+  background:#fff;
+  border-radius:16px;
+  padding:24px 18px;
+  text-align:center;
+  width:90%;
+  max-width:320px;
+  margin:12% auto;
+  box-shadow:0 10px 30px rgba(0,0,0,0.25);
+  animation:popIn 0.4s ease;
+}
+.gift-popup-content h2 { color:#ff7043; margin-bottom:8px }
+.gift-value {
+  font-size:2rem;
+  font-weight:800;
+  color:#16a34a;
+  margin-top:12px;
+}
+.gift-close {
+  position:absolute;
+  right:22px;
+  top:16px;
+  font-size:26px;
+  cursor:pointer;
+  color:#888;
+}
+@keyframes popIn {
+  0%{transform:scale(0.7);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+@keyframes fadeIn {
+  0%{opacity:0}
+  100%{opacity:1}
+}
+
   </style>
 </head>
 <body>
 
 <header>
   <div class="brand">
-    <img class="logo-small" src="images/logocilok.png" alt="Logo Cilok">
+    <img class="logo-small" src="logocilok.png" alt="Logo Cilok">
     <div>
       <h1>Cilok Goang Teh Desi</h1>
       <p>Wisma Agung, Jl. KH Usman Dhomiri RT 02 RW 17, Padasuka — Buka 09:00–24:00</p>
@@ -115,11 +159,28 @@
   <div style="text-align:center;margin-top:18px">
     <a style="background:var(--primary);color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:700" href="menu.pdf" download>📥 Download Menu (PDF)</a>
   </div>
+</div>
 
 <!-- Cart floating -->
 <div class="cart-float" id="cartBtn" title="Lihat Keranjang">
   <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M6 6h15l-1.68 8.39A2 2 0 0 1 17.36 16H8.64a2 2 0 0 1-1.96-1.61L5 2H2" stroke="#333" stroke-width="1.2" stroke-linecap="round"/></svg>
   <div class="badge" id="cartCount">0</div>
+</div>
+
+<!-- Gift button (di bawah cart) -->
+<button id="giftBtn" class="gift-btn" title="Buka Kado — dapatkan voucher!">
+  <span style="font-size:18px">🎁</span>
+  <span style="font-size:13px;line-height:1">Buka Kado</span>
+</button>
+
+  <!-- Popup Kado -->
+<div id="giftPopup" class="gift-popup">
+  <div class="gift-popup-content">
+    <span id="closeGift" class="gift-close">&times;</span>
+    <h2>🎉 Selamat!</h2>
+    <p id="giftText">Kamu mendapatkan voucher spesial 🎁</p>
+    <div class="gift-value" id="giftValue">Rp0</div>
+  </div>
 </div>
 
 <!-- Cart panel -->
@@ -133,9 +194,9 @@
   </div>
   <div style="margin-top:12px;text-align:center">
     <p style="margin:6px 0">Atau pesan langsung via:</p>
-    <a href="https://spf.shopee.co.id/1g9uILh8Vf" target="_blank"><img src="images/shopee.svg" style="width:90px;margin:6px;" alt="Shopee"></a>
-    <a href="https://gofood.co.id/bandung/restaurant/cilok-goang-teh-desi-cimahi-bdf5f39f-21b7-4f84-8c38-33deeed7b509" target="_blank"><img src="images/gojek.svg" style="width:90px;margin:6px;" alt="GoFood"></a>
-    <a href="https://r.grab.com/g/6-20251011_170831_e03d2f193b48446c9ee266e748eda4b7_MEXMPS-6-CZMAV2KKSEJHJN" target="_blank"><img src="images/grab.svg" style="width:90px;margin:6px;" alt="Grab"></a>
+    <a href="https://spf.shopee.co.id/1g9uILh8Vf" target="_blank"><img src="shopee-icon.svg" style="width:90px;margin:6px;" alt="Shopee"></a>
+    <a href="https://gofood.co.id/bandung/restaurant/cilok-goang-teh-desi-cimahi-bdf5f39f-21b7-4f84-8c38-33deeed7b509" target="_blank"><img src="gojek-svgrepo-com.svg" style="width:90px;margin:6px;" alt="GoFood"></a>
+    <a href="https://r.grab.com/g/6-20251011_170831_e03d2f193b48446c9ee266e748eda4b7_MEXMPS-6-CZMAV2KKSEJHJN" target="_blank"><img src="grab-logo-svgrepo-com.svg" style="width:90px;margin:6px;" alt="Grab"></a>
   </div>
 </div>
 
@@ -157,7 +218,6 @@
       </div>
 
       <div id="shippingBlock" style="margin-top:12px">
-        <!-- Isi dinamis: jika Pickup -> no ongkir; else input jarak & tombol hitung -->
         <div class="form-row">
           <label style="min-width:150px;font-weight:600">Masukkan jarak (km)</label>
           <input id="jarakInputModal" type="number" min="0" placeholder="contoh: 6">
@@ -188,13 +248,13 @@
 
 <!-- Floating WA -->
 <a href="https://wa.me/6281212629516" target="_blank" title="Chat Teh Desi" style="position:fixed;left:18px;bottom:18px;z-index:999">
-  <img src="images/whatsapp.svg" style="width:62px;height:62px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.18)">
+  <img src="whatsapp-svgrepo-com.svg" style="width:62px;height:62px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.18)">
 </a>
 
 <script>
 /* ===== DATA MENU (sesuaikan / tambah item di sini) ===== */
 const MENU = [
-  { id: 'm1', name: 'Paket Hemat 1', price: 15000, img:'hemat 1.jpg' },
+   { id: 'm1', name: 'Paket Hemat 1', price: 15000, img:'hemat 1.jpg' },
   { id: 'm2', name: 'Paket Hemat 2', price: 15000, img:'hemat 2.jpg' },
   { id: 'm3', name: 'Paket Hemat 3', price: 13000, img:'paket 3.jpg' },
   { id: 'm4', name: 'Cilok Goang Tulang', price: 12000, img:'cilok goang tulang.jpg' },
@@ -289,10 +349,19 @@ cartBtn.addEventListener('click', ()=> {
 });
 
 function showCartPanel(){ renderCartPanel(); cartPanel.style.display='block'; cartPanel.setAttribute('aria-hidden','false'); }
+
+/* ===== VOUCHER STATE ===== */
+let voucherValue = 0;
+let voucherUsed = false;
+
+/* ===== RENDER CART PANEL (satu fungsi terpusat, menampilkan voucher jika ada) ===== */
 function renderCartPanel(){
   cartItemsEl.innerHTML = '';
   if(cart.length === 0){
-    cartItemsEl.innerHTML = '<p style="color:#666">Keranjang kosong.</p>'; cartTotalEl.textContent = 'Total: Rp0'; renderCartCount(); return;
+    cartItemsEl.innerHTML = '<p style="color:#666">Keranjang kosong.</p>';
+    cartTotalEl.textContent = 'Total: Rp0';
+    renderCartCount();
+    return;
   }
   let total = 0;
   cart.forEach((it, idx) => {
@@ -313,18 +382,29 @@ function renderCartPanel(){
     `;
     cartItemsEl.appendChild(node);
   });
-  cartTotalEl.textContent = `Total: ${rupiah(total)}`;
+
+  let totalSetelahVoucher = total;
+  if(voucherUsed && voucherValue > 0){
+    totalSetelahVoucher = Math.max(0, total - voucherValue);
+  }
+
+  cartTotalEl.innerHTML = `
+    Subtotal: ${rupiah(total)}<br>
+    ${voucherUsed ? `<span style="color:green">🎁 Voucher: -${rupiah(voucherValue)}</span><br>` : ''}
+    <b>Total: ${rupiah(totalSetelahVoucher)}</b>
+  `;
   saveCart();
   renderCartCount();
 }
 
+/* ===== UBAH JUMLAH ===== */
 function changeQty(i, d){
   cart[i].qty += d;
   if(cart[i].qty <= 0) cart.splice(i,1);
   renderCartPanel();
 }
 document.getElementById('clearCart').addEventListener('click', ()=>{
-  if(confirm('Kosongkan keranjang?')){ cart=[]; saveCart(); renderCartPanel(); cartPanel.style.display='none'; }
+  if(confirm('Kosongkan keranjang?')){ cart=[]; voucherUsed=false; voucherValue=0; saveCart(); renderCartPanel(); cartPanel.style.display='none'; }
 });
 
 /* ===== CHECKOUT & ONGKIR ===== */
@@ -350,7 +430,7 @@ function updatePaymentArea(){
   if(val === 'Transfer'){
     area.innerHTML = '<p style="font-weight:700">Transfer ke BCA:<br><span style="font-size:1.05rem">1390997651 a/n Desirusmianti</span></p>';
   } else {
-    area.innerHTML = '<p style="font-weight:700">Bayar via QRIS:</p><p><img src="images/qris.svg" style="width:180px;border-radius:8px"></p>';
+    area.innerHTML = '<p style="font-weight:700">Bayar via QRIS:</p><p><img src="qris-cilokgoang.jpeg" style="width:180px;border-radius:8px"></p>';
   }
 }
 document.querySelectorAll('input[name="paymentMethod"]').forEach(r => r.addEventListener('change', updatePaymentArea));
@@ -385,14 +465,10 @@ function updateShippingBlock(){
 document.querySelectorAll('input[name="shipping"]').forEach(r => r.addEventListener('change', updateShippingBlock));
 updateShippingBlock();
 
-/* ongkir rules:
-   - Shopee: base 8.000 for <=5 km, tambahan 2.000 per km (rounded up)
-   - Gojek: base 9.000 for <=5 km, tambahan 1.500 per km
-   - Grab: base 9.000 for <=5 km, tambahan 1.500 per km
-*/
+/* ongkir rules */
 function kalkulasiOngkir(service, jarak){
   let base = 0, per = 0;
-  if(service === 'Shopee'){ base = 8000; per = 2000; }
+  if(service === 'Shopee'){ base = 8000; per = 1500; }
   if(service === 'Gojek'){ base = 9000; per = 1500; }
   if(service === 'Grab'){ base = 9000; per = 1500; }
   if(jarak > 5){
@@ -422,11 +498,11 @@ checkoutForm.addEventListener('submit', (e) => {
   const pay = document.querySelector('input[name="paymentMethod"]:checked')?.value || 'Transfer';
   const ship = document.querySelector('input[name="shipping"]:checked')?.value || 'Shopee';
   let subtotal = 0;
-  let pesan = 'Halo Teh Desi\\n\\nSaya mau pesan:\\n';
+  let pesan = 'Halo Teh Desi\n\nSaya mau pesan:\n';
   cart.forEach(it => {
     const sub = it.price * it.qty;
     subtotal += sub;
-    pesan += `- ${it.name} x${it.qty} = Rp${sub.toLocaleString('id-ID')}\\n`;
+    pesan += `- ${it.name} x${it.qty} = Rp${sub.toLocaleString('id-ID')}\n`;
   });
   let jarVal = parseFloat(document.getElementById('jarakInputModal')?.value || 0);
   let ongkir = 0;
@@ -434,16 +510,87 @@ checkoutForm.addEventListener('submit', (e) => {
     if(isNaN(jarVal) || jarVal <= 0){ alert('Masukkan jarak (km) untuk estimasi ongkir.'); return; }
     ongkir = kalkulasiOngkir(ship, jarVal);
   }
-  pesan += `\\nMetode Pengiriman: ${ship}\\nEstimasi Ongkir: Rp${ongkir.toLocaleString('id-ID')}\\nMetode Pembayaran: ${pay}\\nTotal: Rp${(subtotal + ongkir).toLocaleString('id-ID')}\\n\\nAlamat / Catatan: `;
+  let totalAkhir = subtotal + ongkir - (voucherUsed ? voucherValue : 0);
+  pesan += `\nMetode Pengiriman: ${ship}\nEstimasi Ongkir: Rp${ongkir.toLocaleString('id-ID')}\nMetode Pembayaran: ${pay}\nVoucher: -Rp${(voucherUsed?voucherValue:0).toLocaleString('id-ID')}\nTotal: Rp${totalAkhir.toLocaleString('id-ID')}\n\nAlamat / Catatan: `;
   const waUrl = 'https://wa.me/6281212629516?text=' + encodeURIComponent(pesan);
   window.open(waUrl, '_blank');
 
-  // clear cart & close modal
+  // reset
   cart = [];
+  voucherUsed = false;
+  voucherValue = 0;
   saveCart();
   renderCartPanel();
   modal.style.display = 'none';
 });
+
+/* ===== VOUCHER (tombol kado) ===== */
+const giftBtn = document.getElementById('giftBtn');
+
+function confettiEffect() {
+  const count = 20;
+  for(let i=0;i<count;i++){
+    const conf = document.createElement('div');
+    conf.style.position = 'fixed';
+    conf.style.width = '7px';
+    conf.style.height = '7px';
+    conf.style.borderRadius = '50%';
+    conf.style.background = ['#ff7043','#ffca28','#66bb6a','#42a5f5'][Math.floor(Math.random()*4)];
+    conf.style.top = (giftBtn.getBoundingClientRect().top + 10) + 'px';
+    conf.style.left = (giftBtn.getBoundingClientRect().left + 10) + 'px';
+    conf.style.zIndex = 10000;
+    conf.style.opacity = 1;
+    document.body.appendChild(conf);
+
+    const angle = Math.random() * 2 * Math.PI;
+    const distance = 40 + Math.random() * 80;
+    const dx = Math.cos(angle) * distance;
+    const dy = Math.sin(angle) * distance;
+
+    conf.animate([
+      { transform:`translate(0,0)`, opacity:1 },
+      { transform:`translate(${dx}px,${dy}px)`, opacity:0 }
+    ], { duration:800 + Math.random()*600, easing:'ease-out' });
+
+    setTimeout(()=>conf.remove(), 1400);
+  }
+}
+
+giftBtn.addEventListener('click', () => {
+  if(voucherUsed){
+    alert('🎫 Voucher sudah didapatkan untuk transaksi ini.');
+    return;
+  }
+
+  // animasi kecil tombol & confetti
+  giftBtn.style.transform = 'scale(0.96)';
+  setTimeout(()=>giftBtn.style.transform='scale(1)', 120);
+  confettiEffect();
+
+  const totalBelanja = cart.reduce((s,i)=>s+(i.price*i.qty),0);
+  if(totalBelanja > 50000){
+    voucherValue = 5000;
+  } else {
+    const opsi = [1000,1500,2000,2500,3000,3500];
+    voucherValue = opsi[Math.floor(Math.random()*opsi.length)];
+  }
+
+  // tampilkan popup
+  document.getElementById('giftValue').textContent = 'Rp' + voucherValue.toLocaleString('id-ID');
+  document.getElementById('giftPopup').style.display = 'block';
+
+  voucherUsed = true;
+  renderCartPanel();
+
+  // otomatis tutup popup setelah 3 detik
+  setTimeout(()=>document.getElementById('giftPopup').style.display='none', 3000);
+});
+
+// tombol close popup
+document.getElementById('closeGift').addEventListener('click', ()=>{
+  document.getElementById('giftPopup').style.display='none';
+});
+
 
 /* init render */
 renderCartPanel();
