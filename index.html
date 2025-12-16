@@ -396,6 +396,36 @@
       font-style: italic;
     }
 
+    /* === VOUCHER SELECTION MODAL === */
+    .voucher-selection-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 3000;
+      backdrop-filter: blur(5px);
+    }
+
+    .voucher-selection-modal.active {
+      display: flex;
+    }
+
+    .voucher-modal-content {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 500px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      border: 4px solid var(--gold);
+    }
+
     /* === MENU STYLES === */
     .menu {
       display: grid;
@@ -708,6 +738,17 @@
     }
 
     /* === MODAL CHECKOUT === */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      z-index: 2000;
+    }
+
     .modal-content {
       background: linear-gradient(135deg, var(--card) 0%, var(--light) 100%);
       margin: 4% auto;
@@ -718,6 +759,7 @@
       box-shadow: 0 25px 60px rgba(0,0,0,0.3);
       border: 1px solid rgba(0,0,0,0.1);
       border-top: 4px solid var(--gold);
+      position: relative;
     }
 
     .close-button {
@@ -727,11 +769,75 @@
       cursor: pointer;
       transition: all 0.2s ease;
       font-weight: 300;
+      background: none;
+      border: none;
     }
 
     .close-button:hover {
       color: var(--dark);
       transform: scale(1.2);
+    }
+
+    .small-btn {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: var(--transition);
+      box-shadow: 0 6px 20px rgba(26, 26, 46, 0.3);
+      font-size: 1rem;
+      min-height: 44px;
+    }
+
+    .small-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(26, 26, 46, 0.4);
+      border-color: var(--gold);
+    }
+
+    .ship-btn {
+      padding: 12px 20px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      transition: var(--transition);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 44px;
+      width: 100%;
+    }
+
+    .ship-shopee {
+      background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+      color: white;
+    }
+
+    .ship-gojek {
+      background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+      color: white;
+    }
+
+    .ship-grab {
+      background: linear-gradient(135deg, #00b14f 0%, #10b981 100%);
+      color: white;
+    }
+
+    .ship-pickup {
+      background: linear-gradient(135deg, #6b7280 0%, #9ca3af 100%);
+      color: white;
+    }
+
+    .ship-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      border-color: var(--gold);
     }
 
     /* === WHATSAPP FLOAT === */
@@ -781,6 +887,16 @@
     @keyframes confetti {
       0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
       100% { transform: translateY(1000px) rotate(360deg); opacity: 0; }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideOut {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(100%); opacity: 0; }
     }
 
     /* === RESPONSIVE === */
@@ -948,7 +1064,7 @@
   <div class="badge" id="cartCount">0</div>
 </div>
 
-<!-- Modal Discount -->
+<!-- Modal Discount (untuk buka kado) -->
 <div id="discountModal" class="discount-modal">
   <div class="discount-content">
     <button class="discount-close" id="closeDiscount">×</button>
@@ -1095,13 +1211,18 @@ const MENU = [
   { id: 'm49', name: 'Green Tea', price: 6000, img:'green tea.jpg' }
 ];
 
-/* ===== PROMO & VOUCHER SYSTEM ===== */
+/* ===== STATE AWAL ===== */
+let cart = JSON.parse(localStorage.getItem('cg_cart') || '[]');
+const rupiah = n => 'Rp' + n.toLocaleString('id-ID');
+function saveCart(){ localStorage.setItem('cg_cart', JSON.stringify(cart)); renderCartCount(); }
+
+/* ===== PROMO & VOUCHER SYSTEM YANG DIPERBAIKI ===== */
 const VOUCHERS = [
   { code: 'CILOK10', discount: 10, minPurchase: 30000, emoji: '🎉', title: 'DISKON 10%', message: 'Selamat! Dapatkan diskon 10% untuk pembelian minimal Rp 30.000' },
   { code: 'CILOK15', discount: 15, minPurchase: 50000, emoji: '🎊', title: 'DISKON 15%', message: 'Wow! Dapatkan diskon 15% untuk pembelian minimal Rp 50.000' },
   { code: 'CILOK20', discount: 20, minPurchase: 75000, emoji: '🔥', title: 'DISKON 20%', message: 'Luar biasa! Dapatkan diskon 20% untuk pembelian minimal Rp 75.000' },
-  { code: 'GRATISMINUM', discount: 100, minPurchase: 40000, emoji: '🥤', title: 'MINUMAN GRATIS', message: 'Dapatkan 1 minuman gratis untuk pembelian minimal Rp 40.000' },
-  { code: 'ONGKIRGRATIS', discount: 'FREE', minPurchase: 50000, emoji: '🚚', title: 'GRATIS ONGKIR', message: 'Gratis ongkir untuk pembelian minimal Rp 50.000 via GoFood/Grab' }
+  { code: 'GRATISMINUM', discount: 'GRATIS MINUMAN', minPurchase: 40000, emoji: '🥤', title: 'MINUMAN GRATIS', message: 'Dapatkan 1 minuman gratis untuk pembelian minimal Rp 40.000' },
+  { code: 'ONGKIRGRATIS', discount: 'GRATIS ONGKIR', minPurchase: 50000, emoji: '🚚', title: 'GRATIS ONGKIR', message: 'Gratis ongkir untuk pembelian minimal Rp 50.000 via GoFood/Grab' }
 ];
 
 const PROMO_TIMERS = [
@@ -1110,40 +1231,13 @@ const PROMO_TIMERS = [
   { id: 'promo3Timer', hours: 11, minutes: 30, seconds: 45 }
 ];
 
+// Inisialisasi voucher system
 let claimedVouchers = JSON.parse(localStorage.getItem('cilok_vouchers')) || [];
 let selectedVoucher = null;
+let discountAmount = 0;
+let shippingCost = 0;
 
-/* ===== STATE ===== */
-let cart = JSON.parse(localStorage.getItem('cg_cart') || '[]');
-const rupiah = n => 'Rp' + n.toLocaleString('id-ID');
-function saveCart(){ localStorage.setItem('cg_cart', JSON.stringify(cart)); renderCartCount(); }
-
-/* ===== RENDER MENU ===== */
-const menuList = document.getElementById('menuList');
-function renderMenu(){
-  menuList.innerHTML = '';
-  MENU.forEach(item => {
-    const div = document.createElement('div');
-    div.className = 'card';
-    div.innerHTML = `
-      <div class="card-badge">HOT</div>
-      <div class="card-image-container">
-        <img src="${item.img}" alt="${item.name}" class="card-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200?text=Cilok+Goang'">
-      </div>
-      <div class="card-content">
-        <h3>${item.name}</h3>
-        <div class="price-container">
-          <div class="price">${rupiah(item.price)}</div>
-        </div>
-        <button onclick="addToCart('${item.id}')">Tambah ke Keranjang 🛒</button>
-      </div>
-    `;
-    menuList.appendChild(div);
-  });
-}
-renderMenu();
-
-/* ===== PROMO FUNCTIONS ===== */
+/* ===== FUNGSI PROMO TIMER ===== */
 function startPromoTimers() {
   PROMO_TIMERS.forEach(promo => {
     const timerElement = document.getElementById(promo.id);
@@ -1171,6 +1265,7 @@ function startPromoTimers() {
   });
 }
 
+/* ===== FUNGSI BUKA KADO ===== */
 function openGiftBox() {
   const lastGiftDate = localStorage.getItem('cilok_last_gift');
   const today = new Date().toDateString();
@@ -1181,12 +1276,12 @@ function openGiftBox() {
   }
   
   const randomIndex = Math.floor(Math.random() * VOUCHERS.length);
-  const selectedVoucher = VOUCHERS[randomIndex];
+  const voucher = VOUCHERS[randomIndex];
   
   claimedVouchers.push({
-    code: selectedVoucher.code,
-    discount: selectedVoucher.discount,
-    minPurchase: selectedVoucher.minPurchase,
+    code: voucher.code,
+    discount: voucher.discount,
+    minPurchase: voucher.minPurchase,
     claimedDate: new Date().toISOString(),
     expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
   });
@@ -1194,10 +1289,11 @@ function openGiftBox() {
   localStorage.setItem('cilok_vouchers', JSON.stringify(claimedVouchers));
   localStorage.setItem('cilok_last_gift', today);
   
-  showDiscountModal(selectedVoucher);
+  showDiscountModal(voucher);
   createConfetti();
 }
 
+/* ===== FUNGSI SHOW DISCOUNT MODAL ===== */
 function showDiscountModal(voucher) {
   const modal = document.getElementById('discountModal');
   const emoji = document.getElementById('discountEmoji');
@@ -1215,6 +1311,7 @@ function showDiscountModal(voucher) {
   modal.style.display = 'block';
 }
 
+/* ===== FUNGSI COPY DISCOUNT CODE ===== */
 function copyDiscountCode() {
   const codeElement = document.getElementById('discountCode');
   const code = codeElement.textContent;
@@ -1232,6 +1329,7 @@ function copyDiscountCode() {
   });
 }
 
+/* ===== FUNGSI CONFETTI ===== */
 function createConfetti() {
   const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3'];
   
@@ -1256,33 +1354,234 @@ function createConfetti() {
   }
 }
 
-function applyVoucherAtCheckout() {
+/* ===== FUNGSI VOUCHER SELECTION MODAL ===== */
+function showVoucherSelectionModal() {
   const now = new Date();
   const validVouchers = claimedVouchers.filter(voucher => {
     return new Date(voucher.expires) > now;
   });
   
   if (validVouchers.length === 0) {
-    return null;
+    alert('Tidak ada voucher yang tersedia. Klik "Buka Kado" untuk mendapatkan voucher!');
+    return Promise.resolve(null);
   }
   
-  let voucherList = 'Voucher yang tersedia:\\n\\n';
+  // Buat modal
+  const modalHTML = `
+    <div id="voucherSelectionModal" style="
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 3000;
+    ">
+      <div style="
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        max-width: 500px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+      ">
+        <h3 style="color: var(--primary); margin-bottom: 20px; text-align: center;">Pilih Voucher</h3>
+        
+        <div style="margin-bottom: 20px; max-height: 300px; overflow-y: auto;">
+          ${validVouchers.map((voucher, index) => `
+            <div id="voucher-${index}" style="
+              border: 2px solid ${selectedVoucher?.code === voucher.code ? 'var(--accent)' : '#eee'};
+              border-radius: 10px;
+              padding: 15px;
+              margin-bottom: 10px;
+              cursor: pointer;
+              transition: all 0.3s;
+              background: ${selectedVoucher?.code === voucher.code ? 'rgba(233, 69, 96, 0.1)' : 'white'};
+            ">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <strong style="color: var(--primary);">${voucher.code}</strong>
+                  <div style="color: var(--accent); font-weight: bold; margin-top: 5px;">
+                    Diskon: ${typeof voucher.discount === 'number' ? voucher.discount + '%' : voucher.discount}
+                  </div>
+                  <div style="color: #666; font-size: 0.9rem; margin-top: 5px;">
+                    Minimal pembelian: Rp ${voucher.minPurchase.toLocaleString('id-ID')}
+                  </div>
+                  <div style="color: #999; font-size: 0.8rem; margin-top: 5px;">
+                    Berlaku hingga: ${new Date(voucher.expires).toLocaleDateString('id-ID')}
+                  </div>
+                </div>
+                <div style="color: ${selectedVoucher?.code === voucher.code ? 'var(--accent)' : '#ccc'}; font-size: 1.5rem;">
+                  ${selectedVoucher?.code === voucher.code ? '✓' : '○'}
+                </div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+        
+        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+          <button id="cancelVoucher" style="
+            padding: 12px 24px;
+            border: 2px solid var(--primary);
+            background: white;
+            color: var(--primary);
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            flex: 1;
+          ">
+            Batal
+          </button>
+          <button id="applyVoucher" style="
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--accent) 0%, #c0392b 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            flex: 2;
+          ">
+            Gunakan Voucher
+          </button>
+        </div>
+        
+        <p style="text-align: center; margin-top: 20px; color: #666; font-size: 0.9rem;">
+          ${validVouchers.length} voucher tersedia
+        </p>
+      </div>
+    </div>
+  `;
+  
+  // Tambahkan modal ke body
+  const modalContainer = document.createElement('div');
+  modalContainer.innerHTML = modalHTML;
+  document.body.appendChild(modalContainer);
+  
+  // Event listeners untuk voucher selection
   validVouchers.forEach((voucher, index) => {
-    voucherList += `${index + 1}. ${voucher.code} - Diskon ${voucher.discount}%\\n`;
-    voucherList += `   Minimal pembelian: Rp ${voucher.minPurchase.toLocaleString('id-ID')}\\n\\n`;
+    document.getElementById(`voucher-${index}`).addEventListener('click', () => {
+      selectedVoucher = voucher;
+      
+      // Update tampilan semua voucher
+      validVouchers.forEach((v, i) => {
+        const voucherEl = document.getElementById(`voucher-${i}`);
+        voucherEl.style.background = i === index ? 'rgba(233, 69, 96, 0.1)' : 'white';
+        voucherEl.style.borderColor = i === index ? 'var(--accent)' : '#eee';
+        const checkDiv = voucherEl.querySelector('div > div:last-child');
+        checkDiv.innerHTML = i === index ? '✓' : '○';
+        checkDiv.style.color = i === index ? 'var(--accent)' : '#ccc';
+      });
+    });
   });
   
-  const selected = prompt(voucherList + 'Masukkan nomor voucher yang ingin digunakan (atau 0 untuk tidak pakai):');
-  const selectedIndex = parseInt(selected) - 1;
-  
-  if (selectedIndex >= 0 && selectedIndex < validVouchers.length) {
-    return validVouchers[selectedIndex];
-  }
-  
-  return null;
+  return new Promise((resolve) => {
+    document.getElementById('applyVoucher').addEventListener('click', () => {
+      modalContainer.remove();
+      calculateDiscountWithVoucher();
+      renderCartPanel();
+      showNotification(`✅ Voucher ${selectedVoucher?.code || ''} diterapkan!`);
+      resolve(selectedVoucher);
+    });
+    
+    document.getElementById('cancelVoucher').addEventListener('click', () => {
+      modalContainer.remove();
+      selectedVoucher = null;
+      resolve(null);
+    });
+    
+    modalContainer.addEventListener('click', (e) => {
+      if (e.target.id === 'voucherSelectionModal') {
+        modalContainer.remove();
+        selectedVoucher = null;
+        resolve(null);
+      }
+    });
+  });
 }
 
-/* ===== CART FUNCTIONS ===== */
+/* ===== FUNGSI HITUNG DISCOUNT ===== */
+function calculateDiscountWithVoucher() {
+  if (!selectedVoucher) {
+    discountAmount = 0;
+    return;
+  }
+  
+  // Hitung subtotal dari cart
+  let subtotal = 0;
+  cart.forEach(item => {
+    const menuItem = MENU.find(m => m.id === item.id);
+    if (menuItem) {
+      subtotal += menuItem.price * item.qty;
+    }
+  });
+  
+  // Cek minimal pembelian
+  if (subtotal < selectedVoucher.minPurchase) {
+    alert(`❌ Minimal pembelian Rp ${selectedVoucher.minPurchase.toLocaleString('id-ID')} untuk voucher ${selectedVoucher.code}`);
+    selectedVoucher = null;
+    discountAmount = 0;
+    return;
+  }
+  
+  // Hitung discount amount
+  if (typeof selectedVoucher.discount === 'number') {
+    discountAmount = (subtotal * selectedVoucher.discount) / 100;
+  } else if (selectedVoucher.discount === 'GRATIS MINUMAN') {
+    // Untuk voucher gratis minuman, discount = harga minuman termurah
+    const minumanPrices = MENU.filter(m => ['m45', 'm46', 'm47', 'm48', 'm49'].includes(m.id)).map(m => m.price);
+    const cheapestDrink = minumanPrices.length > 0 ? Math.min(...minumanPrices) : 6000;
+    discountAmount = cheapestDrink;
+  } else if (selectedVoucher.discount === 'GRATIS ONGKIR') {
+    discountAmount = 0;
+  } else {
+    discountAmount = 0;
+  }
+  
+  return discountAmount;
+}
+
+/* ===== FUNGSI GET DISCOUNT TEXT ===== */
+function getDiscountText() {
+  if (!selectedVoucher) return '';
+  
+  if (typeof selectedVoucher.discount === 'number') {
+    return `Diskon ${selectedVoucher.discount}%`;
+  } else {
+    return selectedVoucher.discount;
+  }
+}
+
+/* ===== FUNGSI MENU ===== */
+const menuList = document.getElementById('menuList');
+function renderMenu(){
+  menuList.innerHTML = '';
+  MENU.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'card';
+    div.innerHTML = `
+      <div class="card-badge">HOT</div>
+      <div class="card-image-container">
+        <img src="${item.img}" alt="${item.name}" class="card-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200?text=Cilok+Goang'">
+      </div>
+      <div class="card-content">
+        <h3>${item.name}</h3>
+        <div class="price-container">
+          <div class="price">${rupiah(item.price)}</div>
+        </div>
+        <button onclick="addToCart('${item.id}')">Tambah ke Keranjang 🛒</button>
+      </div>
+    `;
+    menuList.appendChild(div);
+  });
+}
+renderMenu();
+
+/* ===== FUNGSI CART ===== */
 function addToCart(id){
   const item = MENU.find(m => m.id === id);
   if(!item) return;
@@ -1310,52 +1609,73 @@ cartBtn.addEventListener('click', ()=> {
   cartPanel.style.display = (cartPanel.style.display === 'block') ? 'none' : 'block';
 });
 
-function showCartPanel(){ renderCartPanel(); cartPanel.style.display='block'; cartPanel.setAttribute('aria-hidden','false'); }
+function showCartPanel(){ 
+  renderCartPanel(); 
+  cartPanel.style.display='block'; 
+  cartPanel.setAttribute('aria-hidden','false'); 
+}
 
 function renderCartPanel(){
   cartItemsEl.innerHTML = '';
   if(cart.length === 0){
     cartItemsEl.innerHTML = '<p style="color:#666">Keranjang kosong.</p>';
-    cartTotalEl.textContent = 'Total: Rp0';
+    cartTotalEl.innerHTML = '<div style="text-align: left;">Total: <strong>Rp0</strong></div>';
     renderCartCount();
     return;
   }
   
   let subtotal = 0;
-  cart.forEach((it, idx) => {
-    const sub = it.price * it.qty;
-    subtotal += sub;
+  cart.forEach((item, idx) => {
+    const itemSubtotal = item.price * item.qty;
+    subtotal += itemSubtotal;
+    
     const node = document.createElement('div');
     node.className = 'cart-item';
     node.innerHTML = `
-      <div class="name">${it.name}</div>
+      <div class="name">${item.name}</div>
       <div style="min-width:120px;text-align:right">
-        <div style="font-weight:700">${rupiah(it.price)}</div>
+        <div style="font-weight:700">${rupiah(item.price)}</div>
         <div style="margin-top:6px;display:flex;gap:6px;justify-content:flex-end">
-          <button class="small-btn" onclick="changeQty(${idx},-1)">-</button>
-          <span style="padding:0 8px">${it.qty}</span>
-          <button class="small-btn" onclick="changeQty(${idx},1)">+</button>
+          <button class="small-btn" onclick="changeQty(${idx}, -1)">-</button>
+          <span style="padding:0 8px">${item.qty}</span>
+          <button class="small-btn" onclick="changeQty(${idx}, 1)">+</button>
         </div>
       </div>
     `;
     cartItemsEl.appendChild(node);
   });
-
-  // Calculate discount
-  let discount = 0;
-  if (selectedVoucher && subtotal >= selectedVoucher.minPurchase) {
-    if (typeof selectedVoucher.discount === 'number') {
-      discount = (subtotal * selectedVoucher.discount) / 100;
-    }
-  }
-
-  const total = Math.max(0, subtotal - discount);
   
+  // Hitung discount
+  if (selectedVoucher) {
+    calculateDiscountWithVoucher();
+  } else {
+    discountAmount = 0;
+  }
+  
+  // Hitung total
+  const total = Math.max(0, subtotal - discountAmount);
+  
+  // Tampilkan summary
   cartTotalEl.innerHTML = `
-    Subtotal: ${rupiah(subtotal)}<br>
-    ${discount > 0 ? `<span style="color:green">🎁 Voucher ${selectedVoucher?.code}: -${rupiah(discount)}</span><br>` : ''}
-    <b>Total: ${rupiah(total)}</b>
+    <div style="text-align: left; margin-bottom: 10px;">
+      <div style="display: flex; justify-content: space-between;">
+        <span>Subtotal:</span>
+        <span>${rupiah(subtotal)}</span>
+      </div>
+      ${selectedVoucher ? `
+        <div style="display: flex; justify-content: space-between; color: green; margin-top: 5px;">
+          <span>🎁 Voucher ${selectedVoucher.code}:</span>
+          <span>-${rupiah(discountAmount)}</span>
+        </div>
+      ` : ''}
+      <hr style="margin: 10px 0; border: none; border-top: 2px solid #eee;">
+      <div style="display: flex; justify-content: space-between; font-weight: 800; font-size: 1.2rem;">
+        <span>TOTAL:</span>
+        <span>${rupiah(total)}</span>
+      </div>
+    </div>
   `;
+  
   saveCart();
   renderCartCount();
 }
@@ -1368,11 +1688,13 @@ function changeQty(i, d){
 
 document.getElementById('clearCart').addEventListener('click', ()=>{
   if(confirm('Kosongkan keranjang?')){ 
-    cart=[]; 
+    cart = []; 
     selectedVoucher = null;
+    discountAmount = 0;
     saveCart(); 
     renderCartPanel(); 
     cartPanel.style.display='none'; 
+    showNotification('Keranjang dikosongkan');
   }
 });
 
@@ -1383,39 +1705,32 @@ const modalClose = document.getElementById('modalClose');
 const checkoutForm = document.getElementById('checkoutForm');
 const hasilOngkirModal = document.getElementById('hasilOngkirModal');
 
-checkoutBtn.addEventListener('click', ()=> {
-  if(cart.length === 0){ 
-    alert('Keranjang kosong — tambahkan menu dulu.'); 
-    return; 
+checkoutBtn.addEventListener('click', async () => {
+  if (cart.length === 0) {
+    showNotification('Keranjang kosong — tambahkan menu dulu.');
+    return;
   }
   
-  // Ask about voucher
-  const useVoucher = confirm('Ingin menggunakan voucher diskon?');
-  if (useVoucher) {
-    selectedVoucher = applyVoucherAtCheckout();
-  } else {
-    selectedVoucher = null;
-  }
+  // Tampilkan modal pilihan voucher
+  await showVoucherSelectionModal();
   
-  // Update cart with voucher
-  renderCartPanel();
-  
-  // Open checkout modal
-  modal.style.display='block'; 
-  modal.setAttribute('aria-hidden','false');
-  updatePaymentArea(); 
+  // Buka modal checkout
+  modal.style.display = 'block';
+  modal.setAttribute('aria-hidden', 'false');
+  updatePaymentArea();
   updateShippingBlock();
+  
+  // Update cart dengan discount
+  renderCartPanel();
 });
 
 modalClose.addEventListener('click', ()=> { 
   modal.style.display='none'; 
-  selectedVoucher = null;
 });
 
 window.addEventListener('click', (e)=>{ 
   if(e.target === modal) {
     modal.style.display='none';
-    selectedVoucher = null;
   }
 });
 
@@ -1426,7 +1741,7 @@ function updatePaymentArea(){
   if(val === 'Transfer'){
     area.innerHTML = '<p style="font-weight:700">Transfer ke BCA:<br><span style="font-size:1.05rem">1390997651 a/n Desirusmianti</span></p>';
   } else {
-    area.innerHTML = '<p style="font-weight:700">Bayar via QRIS:</p><p><img src="qris-cilokgoang.jpeg" style="width:180px;border-radius:8px"></p>';
+    area.innerHTML = '<p style="font-weight:700">Bayar via QRIS:</p><p><img src="qris-cilokgoang.jpeg" style="width:180px;border-radius:8px" onerror="this.style.display=\'none\'"></p>';
   }
 }
 
@@ -1439,6 +1754,7 @@ function updateShippingBlock(){
   if(selected === 'Pickup'){
     block.innerHTML = '<p style="font-weight:700">🏠 Ambil di Tempat — Ongkir: Rp0</p>';
     hasilOngkirModal.textContent = '';
+    shippingCost = 0;
     return;
   }
   block.innerHTML = `
@@ -1459,9 +1775,28 @@ function updateShippingBlock(){
       return; 
     }
     const service = document.querySelector('input[name="shipping"]:checked').value;
-    const ong = kalkulasiOngkir(service, jar);
+    
+    // Hitung ongkir
+    let calculatedShippingCost = kalkulasiOngkir(service, jar);
+    
+    // Jika ada voucher gratis ongkir
+    if (selectedVoucher && selectedVoucher.discount === 'GRATIS ONGKIR') {
+      // Hitung subtotal untuk cek minimal pembelian
+      let subtotal = 0;
+      cart.forEach(item => {
+        const menuItem = MENU.find(m => m.id === item.id);
+        if (menuItem) subtotal += menuItem.price * item.qty;
+      });
+      
+      if (subtotal >= selectedVoucher.minPurchase) {
+        calculatedShippingCost = 0;
+      }
+    }
+    
+    shippingCost = calculatedShippingCost;
+    
     const link = linkByService(service);
-    document.getElementById('hasilOngkirModal').innerHTML = `🚚 Estimasi ongkir (${service}): <b>${rupiah(ong)}</b><br><a id="openAppLink" href="${link}" target="_blank" style="font-weight:700;color:var(--primary)">➡️ Buka di aplikasi ${service}</a>`;
+    document.getElementById('hasilOngkirModal').innerHTML = `🚚 Estimasi ongkir (${service}): <b>${rupiah(shippingCost)}</b><br><a id="openAppLink" href="${link}" target="_blank" style="font-weight:700;color:var(--primary)">➡️ Buka di aplikasi ${service}</a>`;
   });
 
   document.getElementById('btnLokasi').addEventListener('click', ()=>{
@@ -1478,7 +1813,7 @@ function updateShippingBlock(){
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
         const jarak = (R * c).toFixed(2);
         document.getElementById('jarakInputModal').value = jarak;
-        alert('✅ Lokasi terdeteksi! Jarak kamu sekitar ' + jarak + ' km dari Cilok Goang Teh Desi.');
+        showNotification('✅ Lokasi terdeteksi! Jarak: ' + jarak + ' km');
       }, function(){
         alert('⚠️ Gagal mendeteksi lokasi. Pastikan izin lokasi diaktifkan.');
       });
@@ -1512,6 +1847,79 @@ function linkByService(service) {
   return links[service] || '#';
 }
 
+/* ===== CHECKOUT FORM SUBMIT ===== */
+checkoutForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  // Hitung subtotal
+  let subtotal = 0;
+  cart.forEach(item => {
+    const menuItem = MENU.find(m => m.id === item.id);
+    if (menuItem) subtotal += menuItem.price * item.qty;
+  });
+  
+  // Hitung total akhir
+  let finalTotal = Math.max(0, subtotal - discountAmount + shippingCost);
+  
+  // Get form values
+  const shippingMethod = document.querySelector('input[name="shipping"]:checked')?.value || 'Pickup';
+  const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked')?.value || 'Transfer';
+  const jarak = document.getElementById('jarakInputModal')?.value || '0';
+  
+  // Build WhatsApp message
+  let message = `*PESANAN CILOK GOANG TEH DESI*%0A%0A`;
+  message += `Halo Teh Desi, saya mau pesan:%0A%0A`;
+  
+  cart.forEach(item => {
+    const menuItem = MENU.find(m => m.id === item.id);
+    if (menuItem) {
+      message += `• ${menuItem.name} (${item.qty} × ${rupiah(menuItem.price)}) = ${rupiah(menuItem.price * item.qty)}%0A`;
+    }
+  });
+  
+  message += `%0A───────────────%0A`;
+  message += `Subtotal: ${rupiah(subtotal)}%0A`;
+  
+  if (selectedVoucher) {
+    message += `Voucher ${selectedVoucher.code}: -${rupiah(discountAmount)}%0A`;
+  }
+  
+  if (shippingCost > 0) {
+    message += `Ongkir (${shippingMethod}): ${rupiah(shippingCost)}%0A`;
+  } else if (shippingMethod !== 'Pickup') {
+    message += `Ongkir: GRATIS ${selectedVoucher ? '(Voucher)' : ''}%0A`;
+  }
+  
+  message += `*TOTAL: ${rupiah(finalTotal)}*%0A%0A`;
+  message += `📦 Pengiriman: ${shippingMethod}${shippingMethod !== 'Pickup' ? ` (${jarak} km)` : ''}%0A`;
+  message += `💳 Pembayaran: ${paymentMethod}%0A`;
+  
+  if (selectedVoucher) {
+    message += `🎁 Voucher: ${selectedVoucher.code} (${getDiscountText()})%0A`;
+  }
+  
+  message += `%0A_Nama: [Nama Lengkap]_%0A`;
+  message += `_Alamat: [Alamat Lengkap]_%0A`;
+  message += `_No. HP: [Nomor WhatsApp]_%0A`;
+  message += `_Catatan: [Jika ada]_`;
+  
+  // Open WhatsApp
+  const whatsappUrl = `https://wa.me/6281212629516?text=${message}`;
+  window.open(whatsappUrl, '_blank');
+  
+  // Reset cart dan voucher
+  cart = [];
+  selectedVoucher = null;
+  discountAmount = 0;
+  shippingCost = 0;
+  saveCart();
+  renderCartPanel();
+  modal.style.display = 'none';
+  cartPanel.style.display = 'none';
+  
+  showNotification('✅ Pesanan dikirim ke WhatsApp!');
+});
+
 /* ===== NOTIFICATION SYSTEM ===== */
 function showNotification(message) {
   const notification = document.createElement('div');
@@ -1519,7 +1927,7 @@ function showNotification(message) {
     position: fixed;
     top: 100px;
     right: 20px;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    background: linear-gradient(135deg, #16c172 0%, #10b981 100%);
     color: white;
     padding: 15px 25px;
     border-radius: 10px;
@@ -1527,12 +1935,9 @@ function showNotification(message) {
     z-index: 2000;
     animation: slideIn 0.3s ease;
     font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 10px;
     max-width: 300px;
   `;
-  notification.innerHTML = `✅ ${message}`;
+  notification.textContent = message;
   document.body.appendChild(notification);
   
   setTimeout(() => {
@@ -1541,7 +1946,7 @@ function showNotification(message) {
   }, 3000);
 }
 
-/* ===== INITIALIZE ===== */
+/* ===== INISIALISASI ===== */
 document.addEventListener('DOMContentLoaded', function() {
   // Start promo timers
   startPromoTimers();
@@ -1569,21 +1974,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
-  
-  // Add confetti animation style
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes slideIn {
-      from { transform: translateX(100%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-    
-    @keyframes slideOut {
-      from { transform: translateX(0); opacity: 1; }
-      to { transform: translateX(100%); opacity: 0; }
-    }
-  `;
-  document.head.appendChild(style);
 });
 </script>
 
