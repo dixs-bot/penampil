@@ -1265,83 +1265,143 @@
 </a>
 
 <script>
-// ===== DATA MENU DENGAN KATEGORI =====
+
+/* ===== DATA MENU LENGKAP DENGAN KATEGORI ===== */
 const MENU_ITEMS = [
-  // Cilok
-  { id: 'm1', name: 'Paket Hemat 1', price: 15000, img:'hemat 1.jpg', category: 'cilok', desc: 'Cilok + Teh' },
-  { id: 'm2', name: 'Paket Hemat 2', price: 15000, img:'hemat 2.jpg', category: 'cilok', desc: 'Cilok Komplit' },
-  { id: 'm3', name: 'Paket Hemat 3', price: 13000, img:'paket 3.jpg', category: 'cilok', desc: 'Cilok Spesial' },
-  { id: 'm4', name: 'Cilok Goang Tulang', price: 12000, img:'cilok goang tulang.jpg', category: 'cilok', desc: 'Dengan tulang ayam' },
-  { id: 'm5', name: 'Cilok Goang Tofu Sehah', price: 10000, img:'tofu.jpg', category: 'cilok', desc: 'Tofu goreng' },
-  { id: 'm6', name: 'Cilok Granat', price: 10000, img:'cilok granat.jpg', category: 'cilok', desc: 'Extra pedas' },
-  { id: 'm7', name: 'Cilok Goang Sambal Ijo', price: 10000, img:'cilok goang sambal ijo.jpg', category: 'cilok', desc: 'Sambal ijo khas' },
+  // ===== PAKET HEMAT =====
+  { id: 'm1', name: 'Paket Hemat 1', price: 15000, img: 'hemat 1.jpg', category: 'paket', desc: 'Paket cilok spesial hemat' },
+  { id: 'm2', name: 'Paket Hemat 2', price: 15000, img: 'hemat 2.jpg', category: 'paket', desc: 'Paket cilok komplit hemat' },
+  { id: 'm3', name: 'Paket Hemat 3', price: 13000, img: 'paket 3.jpg', category: 'paket', desc: 'Paket cilok ekonomis' },
   
-  // Seblak
-  { id: 'm13', name: 'Seblak Kerupuk Endolita', price: 10000, img:'seblak kerupuk.jpg', category: 'seblak', desc: 'Kerupuk pedas' },
-  { id: 'm14', name: 'Seblak Mie kuah Telur Pedas', price: 10000, img:'seblak mie.jpg', category: 'seblak', desc: 'Mie telur spesial' },
-  { id: 'm15', name: 'Seblok Endolita', price: 10000, img:'seblok cilok.jpg', category: 'seblak', desc: 'Seblak + Cilok' },
-  { id: 'm16', name: 'Seblok Ceker Endolita', price: 15000, img:'seblok.jpg', category: 'seblak', desc: 'Dengan ceker' },
+  // ===== CILOK GOANG =====
+  { id: 'm4', name: 'Cilok Goang Tulang', price: 12000, img: 'cilok goang tulang.jpg', category: 'cilok', desc: 'Cilok goang dengan tulang ayam' },
+  { id: 'm5', name: 'Cilok Goang Tofu Sehah', price: 10000, img: 'tofu.jpg', category: 'cilok', desc: 'Cilok goang dengan tofu goreng' },
+  { id: 'm6', name: 'Cilok Granat', price: 10000, img: 'cilok granat.jpg', category: 'cilok', desc: 'Cilok extra pedas seperti granat' },
+  { id: 'm7', name: 'Cilok Goang Sambal Ijo', price: 10000, img: 'cilok goang sambal ijo.jpg', category: 'cilok', desc: 'Cilok goang sambal ijo khas' },
+  { id: 'm8', name: 'Cilok Goang Ceker Sambal Ijo', price: 12000, img: 'cilok goang ceker samal ijo.jpg', category: 'cilok', desc: 'Cilok goang dengan ceker sambal ijo' },
+  { id: 'm9', name: 'Cilok Kuah Boncabe', price: 10000, img: 'cilok kuah endolita.jpg', category: 'cilok', desc: 'Cilok kuah dengan boncabe' },
+  { id: 'm10', name: 'Mie Cilok Goang', price: 10000, img: 'mie cilok goang.jpg', category: 'cilok', desc: 'Mie dengan cilok goang' },
+  { id: 'm11', name: 'Cilok Goang Ceker Pedas', price: 12000, img: 'cilok kuah ceker pedas.jpg', category: 'cilok', desc: 'Cilok goang ceker pedas mantap' },
+  { id: 'm12', name: 'Cilok Kuah Endolita', price: 10000, img: 'cilok kuah endolita.jpg', category: 'cilok', desc: 'Cilok kuah endolita spesial' },
+  { id: 'm24', name: 'CIGO Cilok Goang Setan Merah', price: 10000, img: 'setan merah.jpg', category: 'cilok', desc: 'Cilok goang level setan merah' },
+  { id: 'm35', name: 'Cilok Goang INSTAN KOMPLIT', price: 12000, img: 'instan koplit.jpg', category: 'cilok', desc: 'Cilok goang instan komplit' },
   
-  // Minuman
-  { id: 'm45', name: 'Jus Jeruk Peras', price: 6000, img:'es jeruk.jpg', category: 'minuman', desc: 'Fresh orange juice' },
-  { id: 'm46', name: 'Es Lemon Tea', price: 6000, img:'lemon tea.jpg', category: 'minuman', desc: 'Lemon tea segar' },
-  { id: 'm47', name: 'Capuccino Cincau', price: 6000, img:'capucino cincau.jpeg', category: 'minuman', desc: 'Cappuccino + cincau' },
-  { id: 'm48', name: 'Thai Tea', price: 6000, img:'thai tea.jpeg', category: 'minuman', desc: 'Authentic thai tea' },
-  { id: 'm49', name: 'Green Tea', price: 6000, img:'green tea.jpg', category: 'minuman', desc: 'Green tea segar' },
+  // ===== CILOK GORENG =====
+  { id: 'm21', name: 'Cilok Goreng Asin Keju', price: 10000, img: 'asin keju.jpg', category: 'cilok_goreng', desc: 'Cilok goreng asin dengan keju' },
+  { id: 'm22', name: 'Cilok Goreng Keju Balado', price: 10000, img: 'cilok balado.jpg', category: 'cilok_goreng', desc: 'Cilok goreng keju bumbu balado' },
+  { id: 'm23', name: 'Cilok Goreng Jagung Bakar', price: 10000, img: 'jagung bakar.jpg', category: 'cilok_goreng', desc: 'Cilok goreng rasa jagung bakar' },
+  { id: 'm25', name: 'Cilok Goreng Manis Pedas', price: 10000, img: 'cilok goreng manis pedas.jpg', category: 'cilok_goreng', desc: 'Cilok goreng manis pedas' },
+  { id: 'm26', name: 'Cilok Goreng Asin Pedas', price: 10000, img: 'cilok goreng asin pedas.jpg', category: 'cilok_goreng', desc: 'Cilok goreng asin pedas' },
+  { id: 'm28', name: 'Cilok Bumbu Kacang Lumer', price: 10000, img: 'cilok bumbu kacang.jpg', category: 'cilok_goreng', desc: 'Cilok dengan bumbu kacang lumer' },
+  { id: 'm29', name: 'Cilok Goreng Telur Puyuh', price: 10000, img: 'cilok crispy telor puyuh.jpg', category: 'cilok_goreng', desc: 'Cilok goreng dengan telur puyuh' },
+  { id: 'm30', name: 'Cilok Goreng Crispy', price: 10000, img: 'cilok goreng crispy.jpg', category: 'cilok_goreng', desc: 'Cilok goreng crispy renyah' },
   
-  // Snack
-  { id: 'm42', name: 'Makroni Ngoonah Pedes Sedang', price: 5000, img:'makroni pedes sedang.jpg', category: 'snack', desc: 'Makroni pedas' },
-  { id: 'm43', name: 'Makroni Ngoonah Pedes Banget', price: 5000, img:'makroni pedas daun jeruk.jpg', category: 'snack', desc: 'Extra pedas' },
-  { id: 'm44', name: 'Makroni Ngoonah ORIGINAL', price: 5000, img:'makroni original.jpg', category: 'snack', desc: 'Original flavor' },
-  { id: 'm31', name: 'Rujak Cireng', price: 10000, img:'cireng banjur.jpg', category: 'snack', desc: 'Cireng bumbu rujak' },
-  { id: 'm32', name: 'Cireng Bumbu Kacang', price: 10000, img:'cireng bumbu kacang.jpg', category: 'snack', desc: 'Cireng saus kacang' }
+  // ===== SEBLAK =====
+  { id: 'm13', name: 'Seblak Kerupuk Endolita', price: 10000, img: 'seblak kerupuk.jpg', category: 'seblak', desc: 'Seblak kerupuk endolita pedas' },
+  { id: 'm14', name: 'Seblak Mie kuah Telur Pedas', price: 10000, img: 'seblak mie.jpg', category: 'seblak', desc: 'Seblak mie dengan telur pedas' },
+  { id: 'm15', name: 'Seblok Endolita', price: 10000, img: 'seblok cilok.jpg', category: 'seblak', desc: 'Seblak + cilok endolita' },
+  { id: 'm16', name: 'Seblok Ceker Endolita', price: 15000, img: 'seblok.jpg', category: 'seblak', desc: 'Seblak cilok dengan ceker' },
+  { id: 'm17', name: 'Seblak Kerupuk Rafael', price: 12000, img: 'rafael.jpg', category: 'seblak', desc: 'Seblak kerupuk rafael spesial' },
+  { id: 'm18', name: 'Seblak 4 Varian', price: 10000, img: 'seblak 4.jpg', category: 'seblak', desc: 'Seblak dengan 4 varian isian' },
+  { id: 'm19', name: 'Seblak 5 Varian', price: 12000, img: 'seblak 5.jpg', category: 'seblak', desc: 'Seblak dengan 5 varian isian' },
+  { id: 'm20', name: 'Seblak 6 Varian', price: 15000, img: 'seblak 6.jpg', category: 'seblak', desc: 'Seblak dengan 6 varian isian' },
+  
+  // ===== CIRENG =====
+  { id: 'm31', name: 'Rujak Cireng', price: 10000, img: 'cireng banjur.jpg', category: 'cireng', desc: 'Cireng dengan bumbu rujak' },
+  { id: 'm32', name: 'Cireng Bumbu Kacang', price: 10000, img: 'cireng bumbu kacang.jpg', category: 'cireng', desc: 'Cireng saus kacang spesial' },
+  { id: 'm33', name: 'Cireng Isi Ayam Suir', price: 10000, img: 'cireng isi suwir ayam.jpg', category: 'cireng', desc: 'Cireng isi ayam suwir' },
+  { id: 'm34', name: 'Cireng Bajur Mantul', price: 10000, img: 'cireng banjur.jpg', category: 'cireng', desc: 'Cireng bajur mantul' },
+  
+  // ===== MAKRONI =====
+  { id: 'm42', name: 'Makroni Ngoonah Pedes Sedang', price: 5000, img: 'makroni pedes sedang.jpg', category: 'makroni', desc: 'Makroni pedas level sedang' },
+  { id: 'm43', name: 'Makroni Ngoonah Pedes Banget', price: 5000, img: 'makroni pedas daun jeruk.jpg', category: 'makroni', desc: 'Makroni pedas level tinggi' },
+  { id: 'm44', name: 'Makroni Ngoonah ORIGINAL', price: 5000, img: 'makroni original.jpg', category: 'makroni', desc: 'Makroni original rasa asli' },
+  
+  // ===== MINUMAN =====
+  { id: 'm45', name: 'Jus Jeruk Peras', price: 6000, img: 'es jeruk.jpg', category: 'minuman', desc: 'Jus jeruk peras segar' },
+  { id: 'm46', name: 'Es Lemon Tea', price: 6000, img: 'lemon tea.jpg', category: 'minuman', desc: 'Es lemon tea menyegarkan' },
+  { id: 'm47', name: 'Capuccino Cincau', price: 6000, img: 'capucino cincau.jpeg', category: 'minuman', desc: 'Cappuccino dengan cincau' },
+  { id: 'm48', name: 'Thai Tea', price: 6000, img: 'thai tea.jpeg', category: 'minuman', desc: 'Thai tea autentik' },
+  { id: 'm49', name: 'Green Tea', price: 6000, img: 'green tea.jpg', category: 'minuman', desc: 'Green tea segar' }
 ];
 
-// ===== TESTIMONIALS =====
-const TESTIMONIALS = [
-  { name: 'Rizki Pratama', rating: 5, text: 'Ciloknya enak banget! Pedasnya pas, bikin nagih. Sudah langganan sejak 2020.', date: '2 hari lalu' },
-  { name: 'Sari Dewi', rating: 5, text: 'Seblaknya autentik banget, kuahnya gurih pedas. Harga terjangkau untuk kualitas premium.', date: '1 minggu lalu' },
-  { name: 'Budi Santoso', rating: 4, text: 'Pelayanan cepat, packaging rapi. Cilok gorengnya crispy banget!', date: '3 hari lalu' },
-  { name: 'Ani Wijaya', rating: 5, text: 'Minuman Thai Tea-nya juara! Nggak terlalu manis, pas banget sama ciloknya.', date: '5 hari lalu' }
+// ===== KATEGORI UNTUK FILTER =====
+const CATEGORIES = [
+  { id: 'all', name: 'Semua Menu', icon: '🍽️' },
+  { id: 'paket', name: 'Paket Hemat', icon: '📦' },
+  { id: 'cilok', name: 'Cilok Goang', icon: '🌶️' },
+  { id: 'cilok_goreng', name: 'Cilok Goreng', icon: '🔥' },
+  { id: 'seblak', name: 'Seblak', icon: '🍜' },
+  { id: 'cireng', name: 'Cireng', icon: '🥟' },
+  { id: 'makroni', name: 'Makroni', icon: '🍝' },
+  { id: 'minuman', name: 'Minuman', icon: '🥤' }
 ];
 
 // ===== STATE MANAGEMENT =====
 let cart = JSON.parse(localStorage.getItem('cilok_cart')) || [];
 let currentFilter = 'all';
 
-// ===== INITIALIZE APP =====
-document.addEventListener('DOMContentLoaded', function() {
-  // Render menu
-  renderMenu();
+// ===== FUNGSI UNTUK MEMBUAT FILTER BUTTONS =====
+function createFilterButtons() {
+  const filterContainer = document.querySelector('.menu-filter');
+  filterContainer.innerHTML = '';
   
-  // Render testimonials
-  renderTestimonials();
-  
-  // Setup event listeners
-  setupEventListeners();
-  
-  // Update cart count
-  updateCartCount();
-});
+  CATEGORIES.forEach(category => {
+    const button = document.createElement('button');
+    button.className = `filter-btn ${currentFilter === category.id ? 'active' : ''}`;
+    button.dataset.filter = category.id;
+    button.innerHTML = `${category.icon} ${category.name}`;
+    
+    button.addEventListener('click', () => {
+      // Remove active class from all buttons
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      // Add active class to clicked button
+      button.classList.add('active');
+      
+      // Update current filter and render menu
+      currentFilter = category.id;
+      renderMenu();
+    });
+    
+    filterContainer.appendChild(button);
+  });
+}
 
-// ===== RENDER FUNCTIONS =====
+// ===== FUNGSI UNTUK RENDER MENU =====
 function renderMenu() {
   const menuGrid = document.getElementById('menuGrid');
   menuGrid.innerHTML = '';
   
+  // Filter items based on current selection
   const filteredItems = currentFilter === 'all' 
     ? MENU_ITEMS 
     : MENU_ITEMS.filter(item => item.category === currentFilter);
   
+  // Show message if no items
+  if (filteredItems.length === 0) {
+    menuGrid.innerHTML = `
+      <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+        <div style="font-size: 3rem; margin-bottom: 20px;">🍽️</div>
+        <h3 style="color: var(--text-light); margin-bottom: 10px;">Menu Belum Tersedia</h3>
+        <p style="color: var(--text-light);">Menu dalam kategori ini sedang dalam persiapan.</p>
+      </div>
+    `;
+    return;
+  }
+  
+  // Render each menu item
   filteredItems.forEach(item => {
     const card = document.createElement('div');
     card.className = 'menu-card';
     card.innerHTML = `
-      <div class="card-badge">HOT</div>
-      <img src="${item.img}" alt="${item.name}" class="card-image">
+      <div class="card-badge">${getBadgeText(item.category)}</div>
+      <img src="${item.img}" alt="${item.name}" class="card-image" onerror="this.src='https://via.placeholder.com/300x200?text=Cilok+Goang'">
       <div class="card-content">
         <h3>${item.name}</h3>
-        <p>${item.desc || 'Rasa spesial Teh Desi'}</p>
+        <p>${item.desc}</p>
         <div class="card-footer">
           <div class="price">${formatPrice(item.price)}</div>
           <button class="add-to-cart" onclick="addToCart('${item.id}')">
@@ -1354,32 +1414,77 @@ function renderMenu() {
   });
 }
 
-function renderTestimonials() {
-  const testimonialGrid = document.querySelector('.testimonial-grid');
-  testimonialGrid.innerHTML = '';
+// ===== FUNGSI BANTUAN =====
+function getBadgeText(category) {
+  const badges = {
+    'paket': 'HEMAT',
+    'cilok': 'PEDAS',
+    'cilok_goreng': 'CRISPY',
+    'seblak': 'SPESIAL',
+    'cireng': 'GURIH',
+    'makroni': 'SNACK',
+    'minuman': 'SEGAR'
+  };
+  return badges[category] || 'HOT';
+}
+
+function formatPrice(price) {
+  return 'Rp ' + price.toLocaleString('id-ID');
+}
+
+// ===== CART FUNCTIONS =====
+function addToCart(itemId) {
+  const existingItem = cart.find(item => item.id === itemId);
+  const menuItem = MENU_ITEMS.find(item => item.id === itemId);
   
-  TESTIMONIALS.forEach(testimonial => {
-    const card = document.createElement('div');
-    card.className = 'testimonial-card';
-    card.innerHTML = `
-      <div class="testimonial-header">
-        <div>
-          <strong>${testimonial.name}</strong>
-          <div class="testimonial-rating">
-            ${'★'.repeat(testimonial.rating)}${'☆'.repeat(5 - testimonial.rating)}
-          </div>
-        </div>
-      </div>
-      <p>"${testimonial.text}"</p>
-      <small>${testimonial.date}</small>
-    `;
-    testimonialGrid.appendChild(card);
-  });
+  if (!menuItem) return;
+  
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    cart.push({
+      id: itemId,
+      name: menuItem.name,
+      price: menuItem.price,
+      quantity: 1
+    });
+  }
+  
+  saveCart();
+  updateCartCount();
+  showNotification(`${menuItem.name} ditambahkan ke keranjang!`);
+}
+
+function updateCartQuantity(index, change) {
+  cart[index].quantity += change;
+  
+  if (cart[index].quantity <= 0) {
+    cart.splice(index, 1);
+  }
+  
+  saveCart();
+  updateCartCount();
+  renderCart();
+}
+
+function saveCart() {
+  localStorage.setItem('cilok_cart', JSON.stringify(cart));
+  renderCart();
+}
+
+function updateCartCount() {
+  const count = cart.reduce((total, item) => total + item.quantity, 0);
+  const cartCountElement = document.getElementById('cartCount');
+  if (cartCountElement) {
+    cartCountElement.textContent = count;
+  }
 }
 
 function renderCart() {
   const cartItems = document.getElementById('cartItems');
   const cartTotal = document.getElementById('cartTotal');
+  
+  if (!cartItems || !cartTotal) return;
   
   if (cart.length === 0) {
     cartItems.innerHTML = '<p style="text-align: center; padding: 20px; color: #666;">Keranjang kosong</p>';
@@ -1391,18 +1496,15 @@ function renderCart() {
   let total = 0;
   
   cart.forEach((item, index) => {
-    const menuItem = MENU_ITEMS.find(m => m.id === item.id);
-    if (!menuItem) return;
-    
-    const subtotal = menuItem.price * item.quantity;
+    const subtotal = item.price * item.quantity;
     total += subtotal;
     
     const cartItem = document.createElement('div');
     cartItem.className = 'cart-item';
     cartItem.innerHTML = `
       <div>
-        <strong>${menuItem.name}</strong>
-        <div style="font-size: 0.9rem; color: #666;">${formatPrice(menuItem.price)} × ${item.quantity}</div>
+        <strong>${item.name}</strong>
+        <div style="font-size: 0.9rem; color: #666;">${formatPrice(item.price)} × ${item.quantity}</div>
       </div>
       <div style="text-align: right;">
         <div style="font-weight: 700;">${formatPrice(subtotal)}</div>
@@ -1419,59 +1521,142 @@ function renderCart() {
   cartTotal.textContent = `Total: ${formatPrice(total)}`;
 }
 
-// ===== CART FUNCTIONS =====
-function addToCart(itemId) {
-  const existingItem = cart.find(item => item.id === itemId);
+// ===== NOTIFICATION SYSTEM =====
+function showNotification(message) {
+  // Remove existing notification
+  const existingNotification = document.querySelector('.notification');
+  if (existingNotification) {
+    existingNotification.remove();
+  }
   
-  if (existingItem) {
-    existingItem.quantity += 1;
-  } else {
-    cart.push({
-      id: itemId,
-      quantity: 1
+  // Create new notification
+  const notification = document.createElement('div');
+  notification.className = 'notification';
+  notification.style.cssText = `
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    background: linear-gradient(135deg, var(--accent) 0%, #c0392b 100%);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    z-index: 2000;
+    animation: slideIn 0.3s ease;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  `;
+  notification.innerHTML = `✅ ${message}`;
+  document.body.appendChild(notification);
+  
+  // Remove after 3 seconds
+  setTimeout(() => {
+    notification.style.animation = 'slideOut 0.3s ease';
+    setTimeout(() => notification.remove(), 300);
+  }, 3000);
+}
+
+// Add animation styles
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  
+  @keyframes slideOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
+  }
+`;
+document.head.appendChild(style);
+
+// ===== INITIALIZE APP =====
+document.addEventListener('DOMContentLoaded', function() {
+  // Create filter buttons
+  createFilterButtons();
+  
+  // Render menu
+  renderMenu();
+  
+  // Render cart if elements exist
+  renderCart();
+  
+  // Update cart count
+  updateCartCount();
+  
+  // Setup other event listeners
+  setupCartEventListeners();
+});
+
+// ===== CART EVENT LISTENERS =====
+function setupCartEventListeners() {
+  // Cart float button
+  const cartFloat = document.getElementById('cartFloat');
+  if (cartFloat) {
+    cartFloat.addEventListener('click', showCartPanel);
+  }
+  
+  // Close cart button
+  const closeCart = document.getElementById('closeCart');
+  if (closeCart) {
+    closeCart.addEventListener('click', hideCartPanel);
+  }
+  
+  // Clear cart button
+  const clearCart = document.getElementById('clearCart');
+  if (clearCart) {
+    clearCart.addEventListener('click', () => {
+      if (cart.length === 0) return;
+      
+      if (confirm('Yakin ingin mengosongkan keranjang?')) {
+        cart = [];
+        saveCart();
+        updateCartCount();
+        renderCart();
+        hideCartPanel();
+        showNotification('Keranjang dikosongkan');
+      }
     });
   }
   
-  saveCart();
-  updateCartCount();
-  showNotification('Ditambahkan ke keranjang!');
-}
-
-function updateCartQuantity(index, change) {
-  cart[index].quantity += change;
-  
-  if (cart[index].quantity <= 0) {
-    cart.splice(index, 1);
+  // Checkout button
+  const checkoutBtn = document.getElementById('checkoutBtn');
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', function() {
+      if (cart.length === 0) {
+        showNotification('Keranjang kosong! Tambahkan menu dulu.');
+        return;
+      }
+      
+      // Show checkout modal
+      document.getElementById('checkoutModal').classList.add('active');
+      renderCheckoutForm();
+    });
   }
   
-  saveCart();
-  updateCartCount();
-  renderCart();
-}
-
-function clearCart() {
-  if (cart.length === 0) return;
+  // Close modal button
+  const closeModal = document.getElementById('closeModal');
+  if (closeModal) {
+    closeModal.addEventListener('click', function() {
+      document.getElementById('checkoutModal').classList.remove('active');
+    });
+  }
   
-  if (confirm('Kosongkan keranjang?')) {
-    cart = [];
-    saveCart();
-    updateCartCount();
-    renderCart();
-    hideCartPanel();
+  // Close modal when clicking outside
+  const checkoutModal = document.getElementById('checkoutModal');
+  if (checkoutModal) {
+    checkoutModal.addEventListener('click', function(event) {
+      if (event.target === this) {
+        this.classList.remove('active');
+      }
+    });
   }
 }
 
-function saveCart() {
-  localStorage.setItem('cilok_cart', JSON.stringify(cart));
-  renderCart();
-}
-
-function updateCartCount() {
-  const count = cart.reduce((total, item) => total + item.quantity, 0);
-  document.getElementById('cartCount').textContent = count;
-}
-
-// ===== UI FUNCTIONS =====
+// ===== CART PANEL FUNCTIONS =====
 function showCartPanel() {
   renderCart();
   document.getElementById('cartPanel').classList.add('active');
@@ -1481,155 +1666,36 @@ function hideCartPanel() {
   document.getElementById('cartPanel').classList.remove('active');
 }
 
-function showNotification(message) {
-  // Create notification element
-  const notification = document.createElement('div');
-  notification.style.cssText = `
-    position: fixed;
-    top: 80px;
-    right: 20px;
-    background: var(--accent);
-    color: white;
-    padding: 15px 25px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    z-index: 2000;
-    animation: fadeIn 0.3s ease;
-    font-weight: 600;
-  `;
-  notification.textContent = message;
-  document.body.appendChild(notification);
-  
-  // Remove after 3 seconds
-  setTimeout(() => {
-    notification.style.animation = 'fadeIn 0.3s ease reverse';
-    setTimeout(() => notification.remove(), 300);
-  }, 3000);
-}
-
-// ===== EVENT LISTENERS SETUP =====
-function setupEventListeners() {
-  // Mobile menu toggle
-  document.getElementById('mobileToggle').addEventListener('click', function() {
-    document.getElementById('mobileNav').classList.toggle('active');
-  });
-  
-  // Close mobile menu when clicking outside
-  document.addEventListener('click', function(event) {
-    const mobileNav = document.getElementById('mobileNav');
-    const mobileToggle = document.getElementById('mobileToggle');
-    
-    if (!mobileNav.contains(event.target) && !mobileToggle.contains(event.target)) {
-      mobileNav.classList.remove('active');
-    }
-  });
-  
-  // Menu filter buttons
-  document.querySelectorAll('.filter-btn').forEach(button => {
-    button.addEventListener('click', function() {
-      // Remove active class from all buttons
-      document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      
-      // Add active class to clicked button
-      this.classList.add('active');
-      
-      // Update current filter and render menu
-      currentFilter = this.dataset.filter;
-      renderMenu();
-    });
-  });
-  
-  // Cart float button
-  document.getElementById('cartFloat').addEventListener('click', showCartPanel);
-  
-  // Close cart button
-  document.getElementById('closeCart').addEventListener('click', hideCartPanel);
-  
-  // Clear cart button
-  document.getElementById('clearCart').addEventListener('click', clearCart);
-  
-  // Checkout button
-  document.getElementById('checkoutBtn').addEventListener('click', function() {
-    if (cart.length === 0) {
-      showNotification('Keranjang kosong!');
-      return;
-    }
-    
-    // Show checkout modal
-    document.getElementById('checkoutModal').classList.add('active');
-    renderCheckoutForm();
-  });
-  
-  // Close modal button
-  document.getElementById('closeModal').addEventListener('click', function() {
-    document.getElementById('checkoutModal').classList.remove('active');
-  });
-  
-  // Close modal when clicking outside
-  document.getElementById('checkoutModal').addEventListener('click', function(event) {
-    if (event.target === this) {
-      this.classList.remove('active');
-    }
-  });
-  
-  // Smooth scroll for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      
-      const targetId = this.getAttribute('href');
-      if (targetId === '#') return;
-      
-      const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        window.scrollTo({
-          top: targetElement.offsetTop - 80,
-          behavior: 'smooth'
-        });
-        
-        // Close mobile menu if open
-        document.getElementById('mobileNav').classList.remove('active');
-      }
-    });
-  });
-}
-
 // ===== CHECKOUT FUNCTIONS =====
 function renderCheckoutForm() {
   const modalContent = document.querySelector('#checkoutModal .modal-content > div');
   
-  let total = cart.reduce((sum, item) => {
-    const menuItem = MENU_ITEMS.find(m => m.id === item.id);
-    return sum + (menuItem.price * item.quantity);
+  let subtotal = cart.reduce((sum, item) => {
+    return sum + (item.price * item.quantity);
   }, 0);
   
   modalContent.innerHTML = `
-    <h3 style="margin-bottom: 20px;">Ringkasan Pesanan</h3>
+    <h3 style="margin-bottom: 20px; color: var(--primary);">Checkout Pesanan</h3>
     
     <div style="margin-bottom: 20px; max-height: 200px; overflow-y: auto;">
-      ${cart.map(item => {
-        const menuItem = MENU_ITEMS.find(m => m.id === item.id);
-        return `
-          <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #eee;">
-            <div>
-              <strong>${menuItem.name}</strong>
-              <div style="font-size: 0.9rem; color: #666;">${item.quantity} × ${formatPrice(menuItem.price)}</div>
-            </div>
-            <div>${formatPrice(menuItem.price * item.quantity)}</div>
+      ${cart.map(item => `
+        <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #eee;">
+          <div>
+            <strong>${item.name}</strong>
+            <div style="font-size: 0.9rem; color: #666;">${item.quantity} × ${formatPrice(item.price)}</div>
           </div>
-        `;
-      }).join('')}
+          <div style="font-weight: 600;">${formatPrice(item.price * item.quantity)}</div>
+        </div>
+      `).join('')}
     </div>
     
     <div style="font-weight: 800; font-size: 1.2rem; text-align: right; margin-bottom: 20px; padding-top: 10px; border-top: 2px solid var(--gold);">
-      Total: ${formatPrice(total)}
+      Subtotal: ${formatPrice(subtotal)}
     </div>
     
     <div style="margin-bottom: 20px;">
-      <label style="display: block; margin-bottom: 8px; font-weight: 600;">Metode Pengiriman</label>
-      <select id="shippingMethod" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd;">
+      <label style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--primary);">Metode Pengiriman</label>
+      <select id="shippingMethod" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; background: white;">
         <option value="pickup">Ambil di Tempat (Rp 0)</option>
         <option value="grab">GrabExpress (Rp 15.000)</option>
         <option value="gojek">GoSend (Rp 12.000)</option>
@@ -1638,29 +1704,38 @@ function renderCheckoutForm() {
     </div>
     
     <div style="margin-bottom: 20px;">
-      <label style="display: block; margin-bottom: 8px; font-weight: 600;">Metode Pembayaran</label>
-      <select id="paymentMethod" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd;">
+      <label style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--primary);">Metode Pembayaran</label>
+      <select id="paymentMethod" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; background: white;">
         <option value="cash">Cash on Delivery</option>
-        <option value="transfer">Transfer Bank</option>
+        <option value="transfer">Transfer Bank (BCA 1390997651 a/n Desirusmianti)</option>
         <option value="qris">QRIS</option>
       </select>
     </div>
     
     <div style="margin-bottom: 20px;">
-      <label style="display: block; margin-bottom: 8px; font-weight: 600;">Catatan (Opsional)</label>
-      <textarea id="orderNotes" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; min-height: 80px;" placeholder="Contoh: Extra pedas, tidak pakai daun bawang, dll."></textarea>
+      <label style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--primary);">Catatan Pesanan (Opsional)</label>
+      <textarea id="orderNotes" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; min-height: 80px; background: white;" placeholder="Contoh: Extra pedas, tidak pakai daun bawang, lebih banyak kuah, dll."></textarea>
     </div>
     
-    <button id="confirmCheckout" class="add-to-cart" style="width: 100%; padding: 15px; font-size: 1.1rem;">
-      Konfirmasi Pesanan via WhatsApp
-    </button>
+    <div style="display: flex; gap: 10px;">
+      <button id="cancelCheckout" style="flex: 1; padding: 15px; border-radius: 8px; border: 2px solid var(--primary); background: white; color: var(--primary); font-weight: 600; cursor: pointer;">
+        Batal
+      </button>
+      <button id="confirmCheckout" style="flex: 2; padding: 15px; border-radius: 8px; border: none; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: white; font-weight: 600; cursor: pointer; font-size: 1.1rem;">
+        💬 Kirim ke WhatsApp
+      </button>
+    </div>
     
     <p style="text-align: center; margin-top: 15px; color: #666; font-size: 0.9rem;">
       Pesanan akan dikonfirmasi via WhatsApp dalam 1-5 menit
     </p>
   `;
   
-  // Add event listener to confirm button
+  // Add event listeners to buttons
+  document.getElementById('cancelCheckout').addEventListener('click', () => {
+    document.getElementById('checkoutModal').classList.remove('active');
+  });
+  
   document.getElementById('confirmCheckout').addEventListener('click', processCheckout);
 }
 
@@ -1681,39 +1756,37 @@ function processCheckout() {
   
   // Calculate total
   let subtotal = cart.reduce((sum, item) => {
-    const menuItem = MENU_ITEMS.find(m => m.id === item.id);
-    return sum + (menuItem.price * item.quantity);
+    return sum + (item.price * item.quantity);
   }, 0);
   
   const total = subtotal + shippingCost;
   
   // Build WhatsApp message
-  let message = `Halo Teh Desi, saya mau pesan:\n\n`;
+  let message = `*PESANAN CILOK GOANG TEH DESI*%0A%0A`;
+  message += `Halo Teh Desi, saya mau pesan:%0A%0A`;
   
   cart.forEach(item => {
-    const menuItem = MENU_ITEMS.find(m => m.id === item.id);
-    message += `• ${menuItem.name} (${item.quantity} × ${formatPrice(menuItem.price)}) = ${formatPrice(menuItem.price * item.quantity)}\n`;
+    message += `• ${item.name} (${item.quantity} × ${formatPrice(item.price)}) = ${formatPrice(item.price * item.quantity)}%0A`;
   });
   
-  message += `\nSubtotal: ${formatPrice(subtotal)}`;
-  message += `\nOngkir: ${formatPrice(shippingCost)}`;
-  message += `\n*Total: ${formatPrice(total)}*`;
-  message += `\n\nMetode Pengiriman: ${shippingMethod}`;
-  message += `\nMetode Pembayaran: ${paymentMethod}`;
+  message += `%0ASubtotal: ${formatPrice(subtotal)}`;
+  message += `%0AOngkir: ${formatPrice(shippingCost)}`;
+  message += `%0A*Total: ${formatPrice(total)}*`;
+  message += `%0A%0AMetode Pengiriman: ${shippingMethod}`;
+  message += `%0AMetode Pembayaran: ${paymentMethod}`;
   
   if (notes) {
-    message += `\nCatatan: ${notes}`;
+    message += `%0ACatatan: ${notes}`;
   }
   
-  message += `\n\nNama: [Nama Anda]`;
-  message += `\nAlamat: [Alamat Lengkap]`;
-  message += `\nNo. HP: [Nomor WhatsApp]`;
+  message += `%0A%0A_Nama: [Nama Anda]_`;
+  message += `%0A_Alamat: [Alamat Lengkap]_`;
+  message += `%0A_No. HP: [Nomor WhatsApp]_`;
   
-  // Encode message for URL
-  const encodedMessage = encodeURIComponent(message);
-  const whatsappUrl = `https://wa.me/6281212629516?text=${encodedMessage}`;
+  // WhatsApp URL
+  const whatsappUrl = `https://wa.me/6281212629516?text=${message}`;
   
-  // Open WhatsApp
+  // Open WhatsApp in new tab
   window.open(whatsappUrl, '_blank');
   
   // Clear cart and close modal
@@ -1726,50 +1799,18 @@ function processCheckout() {
   showNotification('Pesanan dikirim ke WhatsApp!');
 }
 
-// ===== UTILITY FUNCTIONS =====
-function formatPrice(price) {
-  return 'Rp ' + price.toLocaleString('id-ID');
-}
-
-// ===== SERVICE WORKER FOR PWA =====
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js').catch(error => {
-      console.log('Service Worker registration failed:', error);
-    });
-  });
-}
-
-// ===== MANIFEST FOR PWA =====
-const manifest = {
-  "name": "Cilok Goang Teh Desi",
-  "short_name": "Cilok Teh Desi",
-  "description": "Pesan cilok goang pedas khas Cimahi online",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#1a1a2e",
-  "theme_color": "#1a1a2e",
-  "icons": [
-    {
-      "src": "logocilok.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "logocilok.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
-};
-
-// Create manifest link if not exists
-if (!document.querySelector('link[rel="manifest"]')) {
-  const link = document.createElement('link');
-  link.rel = 'manifest';
-  link.href = 'data:application/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(manifest));
-  document.head.appendChild(link);
-}
+// ===== ADD STYLES FOR IMAGE FALLBACK =====
+const imageFallbackStyle = document.createElement('style');
+imageFallbackStyle.textContent = `
+  .menu-card img {
+    background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+  }
+  
+  .menu-card:hover img {
+    transform: scale(1.05);
+  }
+`;
+document.head.appendChild(imageFallbackStyle);
 </script>
 
 </body>
