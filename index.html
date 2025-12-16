@@ -964,6 +964,269 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+
+/* === PROMO SECTION === */
+.promo-section {
+  background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
+  border-radius: var(--border-radius);
+  padding: 40px 20px;
+  margin: 60px 0;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #ff6b6b;
+}
+
+.promo-section::before {
+  content: '🎉';
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 4rem;
+  opacity: 0.1;
+  z-index: 0;
+}
+
+.promo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.promo-card {
+  background: white;
+  border-radius: var(--border-radius);
+  padding: 25px;
+  box-shadow: var(--shadow);
+  border-top: 4px solid var(--accent);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.promo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+.promo-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: linear-gradient(135deg, #ff6b6b 0%, #c0392b 100%);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  animation: pulse 2s infinite;
+}
+
+.promo-icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.discount-amount {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--accent);
+  text-shadow: 0 2px 10px rgba(233, 69, 96, 0.2);
+  margin: 10px 0;
+}
+
+.countdown {
+  background: rgba(233, 69, 96, 0.1);
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.countdown-timer {
+  font-family: monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-top: 5px;
+}
+
+/* === GIFT BOX ANIMATION === */
+.gift-box {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+  border-radius: 15px;
+  position: relative;
+  cursor: pointer;
+  margin: 0 auto 20px;
+  box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+  transition: var(--transition);
+  animation: float 3s ease-in-out infinite;
+}
+
+.gift-box:hover {
+  transform: scale(1.1) rotate(5deg);
+  animation: none;
+}
+
+.gift-lid {
+  width: 90px;
+  height: 20px;
+  background: linear-gradient(135deg, var(--gold-dark) 0%, #b8860b 100%);
+  border-radius: 8px 8px 0 0;
+  position: absolute;
+  top: -10px;
+  left: -5px;
+}
+
+.gift-bow {
+  width: 20px;
+  height: 20px;
+  background: var(--accent);
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.gift-bow::before,
+.gift-bow::after {
+  content: '';
+  position: absolute;
+  width: 40px;
+  height: 20px;
+  background: var(--accent);
+  border-radius: 20px;
+  top: 10px;
+}
+
+.gift-bow::before {
+  left: -30px;
+  transform: rotate(-45deg);
+}
+
+.gift-bow::after {
+  right: -30px;
+  transform: rotate(45deg);
+}
+
+/* === DISCOUNT MODAL === */
+.discount-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+  backdrop-filter: blur(5px);
+  animation: fadeIn 0.3s ease;
+}
+
+.discount-modal.active {
+  display: flex;
+}
+
+.discount-content {
+  background: linear-gradient(135deg, white 0%, #fff9f9 100%);
+  border-radius: 25px;
+  padding: 40px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  position: relative;
+  border: 4px solid var(--gold);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  animation: popIn 0.5s ease;
+}
+
+.discount-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  color: #666;
+  cursor: pointer;
+  transition: var(--transition);
+  background: none;
+  border: none;
+  font-weight: 300;
+}
+
+.discount-close:hover {
+  color: var(--accent);
+  transform: scale(1.2);
+}
+
+.discount-emoji {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  animation: bounce 1s ease infinite alternate;
+}
+
+.discount-title {
+  color: var(--primary);
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  font-weight: 800;
+}
+
+.discount-code {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 15px;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  margin: 20px 0;
+  display: inline-block;
+  border: 3px dashed white;
+  cursor: pointer;
+  transition: var(--transition);
+  user-select: all;
+}
+
+.discount-code:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(26, 26, 46, 0.3);
+}
+
+.discount-code.copied {
+  background: linear-gradient(135deg, #16c172 0%, #10b981 100%);
+  animation: pulse 0.5s ease;
+}
+
+.discount-note {
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 20px;
+  font-style: italic;
+}
+
+/* === ANIMATIONS TAMBAHAN === */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes bounce {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-10px); }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
   </style>
 </head>
 <body>
