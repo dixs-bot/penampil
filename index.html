@@ -16,96 +16,182 @@
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-   /* === Perbaikan Desain Mewah & Elegan === */
+/* === DESAIN PREMIUM & LUXURY - BINTANG LIMA === */
 :root {
-  --primary: #2c3e50; /* Warna biru gelap elegan */
-  --accent: #e74c3c; /* Warna merah muda elegan */
-  --bg: #f8f9fa; /* Background putih keabu-abuan */
-  --muted: #6c757d;
+  --primary: #1a1a2e; /* Midnight Blue - Elegan & Mewah */
+  --secondary: #16213e; /* Dark Blue - Kontras */
+  --accent: #e94560; /* Merah muda premium */
+  --gold: #ffd700; /* Emas untuk aksen mewah */
+  --gold-dark: #daa520; /* Emas tua */
+  --silver: #c0c0c0; /* Perak */
+  --bg: #f5f5f5; /* Background putih abu-abu */
   --card: #ffffff;
-  --gold: #d4af37; /* Warna emas untuk aksen mewah */
-  --dark: #1a252f;
+  --dark: #0f0f23;
+  --light: #f8f9fa;
 }
 
-/* Typography yang lebih elegan */
+/* Typography Premium */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
 body {
-  font-family: 'Poppins', 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
   background: var(--bg);
   color: var(--dark);
-  line-height: 1.7;
+  line-height: 1.8;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
+/* Header dengan desain mewah */
 header {
-  background: linear-gradient(135deg, var(--dark) 0%, #34495e 100%);
+  background: linear-gradient(135deg, var(--dark) 0%, var(--secondary) 100%);
   color: white;
-  padding: 24px 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  padding: 30px 0;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 3px solid var(--gold);
 }
 
 .brand {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
   display: flex;
   align-items: center;
-  gap: 20px;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 30px;
 }
 
 .logo-small {
-  width: 72px;
-  height: 72px;
-  border-radius: 12px;
+  width: 90px;
+  height: 90px;
+  border-radius: 15px;
   object-fit: cover;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-  border: 3px solid rgba(255,255,255,0.2);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  border: 4px solid rgba(255,255,255,0.2);
+  transition: all 0.3s ease;
 }
 
-header h1 {
+.logo-small:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 40px rgba(255,215,0,0.3);
+}
+
+.brand-info h1 {
   margin: 0;
-  font-size: 1.8rem;
+  font-size: 2.2rem;
   font-weight: 700;
-  letter-spacing: -0.5px;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
-header p {
-  margin: 4px 0 0;
-  font-size: 1rem;
+.brand-info p {
+  margin: 8px 0 0;
+  font-size: 1.1rem;
   opacity: 0.9;
   font-weight: 300;
+  font-family: 'Playfair Display', serif;
 }
 
+/* Container dengan padding yang lebih baik */
 .container {
-  max-width: 1200px;
-  margin: 30px auto;
-  padding: 0 20px;
+  max-width: 1300px;
+  margin: 50px auto;
+  padding: 0 40px;
 }
 
-/* Banner dengan efek gradient mewah */
-div[style*="text-align:center;margin:10px 0"] {
-  margin: 30px 0;
-  padding: 20px;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+/* Banner dengan desain premium */
+.banner-container {
+  margin: 40px 0;
+  padding: 30px;
+  background: linear-gradient(135deg, var(--light) 0%, #e8e8e8 100%);
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.05);
 }
 
-/* Menu dengan desain kartu mewah */
+.banner-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold) 0%, var(--accent) 100%);
+}
+
+.banner-image {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+  transition: transform 0.5s ease;
+}
+
+.banner-image:hover {
+  transform: scale(1.02);
+}
+
+/* Menu dengan desain kartu luxury */
 .menu {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
-  margin: 40px 0;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  margin: 50px 0;
+}
+
+.menu-title {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.menu-title h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 20px;
+  font-family: 'Playfair Display', serif;
+  position: relative;
+  display: inline-block;
+}
+
+.menu-title h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold) 0%, var(--accent) 100%);
 }
 
 .card {
   background: var(--card);
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
   text-align: center;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(0,0,0,0.05);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
   overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
 }
 
 .card::before {
@@ -114,202 +200,292 @@ div[style*="text-align:center;margin:10px 0"] {
   top: 0;
   left: 0;
   width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
+  height: 5px;
+  background: linear-gradient(90deg, var(--gold) 0%, var(--accent) 100%);
 }
 
 .card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
-  border-color: var(--primary);
+  transform: translateY(-15px) scale(1.02);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+  border-color: var(--gold);
 }
 
-.card img {
+.card-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: linear-gradient(135deg, var(--accent) 0%, #c0392b 100%);
+  color: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(233, 69, 96, 0.3);
+}
+
+.card-image-container {
+  position: relative;
+  margin-bottom: 20px;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.card-image {
   width: 100%;
-  height: 180px;
+  height: 200px;
   object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 16px;
-  transition: transform 0.3s ease;
+  transition: transform 0.5s ease;
 }
 
-.card:hover img {
-  transform: scale(1.05);
+.card:hover .card-image {
+  transform: scale(1.1);
+}
+
+.card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .card h3 {
-  margin: 0 0 12px;
+  margin: 0 0 15px;
   color: var(--dark);
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 600;
+  font-family: 'Playfair Display', serif;
+}
+
+.price-container {
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
 }
 
 .price {
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: var(--primary);
-  margin-bottom: 16px;
+  font-family: 'Playfair Display', serif;
+}
+
+.price::before {
+  content: 'Rp';
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--dark);
+}
+
+.original-price {
+  font-size: 1.2rem;
+  color: #888;
+  text-decoration: line-through;
+  font-weight: 400;
 }
 
 .card button {
-  background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   color: white;
   border: none;
-  padding: 12px 24px;
-  border-radius: 10px;
+  padding: 14px 28px;
+  border-radius: 12px;
   cursor: pointer;
   font-weight: 600;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(44, 62, 80, 0.2);
+  font-size: 1.1rem;
+  transition: all 0.4s ease;
+  box-shadow: 0 6px 20px rgba(26, 26, 46, 0.3);
+  margin-top: auto;
+  border: 2px solid transparent;
 }
 
 .card button:hover {
-  background: linear-gradient(135deg, var(--accent) 0%, #c0392b 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(231, 76, 60, 0.3);
+  background: linear-gradient(135deg, var(--accent) 0%, #e74c3c 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(233, 69, 96, 0.4);
+  border-color: var(--gold);
 }
 
-/* Platform dengan desain lebih elegan */
+/* Platform dengan desain premium */
 .platforms {
   display: flex;
-  gap: 20px;
+  gap: 30px;
   justify-content: center;
   flex-wrap: wrap;
-  margin: 40px 0;
+  margin: 60px 0;
 }
 
-.platforms img {
-  width: 140px;
+.platform-card {
+  background: var(--card);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0,0,0,0.05);
+  text-align: center;
+  width: 160px;
+}
+
+.platform-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+  border-color: var(--gold);
+}
+
+.platform-card img {
+  width: 100px;
+  height: 100px;
   border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+  margin-bottom: 15px;
   transition: transform 0.3s ease;
 }
 
-.platforms img:hover {
-  transform: translateY(-5px);
+.platform-card:hover img {
+  transform: scale(1.1);
 }
 
-/* Cart floating dengan desain premium */
+.platform-card p {
+  margin: 0;
+  font-weight: 500;
+  color: var(--dark);
+}
+
+/* Cart floating dengan desain ultra premium */
 .cart-float {
   position: fixed;
-  right: 24px;
-  top: 24px;
-  width: 90px;
-  height: 90px;
-  background: linear-gradient(135deg, var(--dark) 0%, #34495e 100%);
-  border-radius: 16px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+  right: 30px;
+  top: 30px;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, var(--dark) 0%, var(--secondary) 100%);
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.35);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 999;
-  border: 2px solid rgba(255,255,255,0.1);
-  transition: all 0.3s ease;
+  border: 3px solid rgba(255,255,255,0.15);
+  transition: all 0.4s ease;
 }
 
 .cart-float:hover {
-  transform: scale(1.05);
-  box-shadow: 0 20px 45px rgba(0,0,0,0.3);
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+  border-color: var(--gold);
+}
+
+.cart-float svg {
+  width: 36px;
+  height: 36px;
+  fill: white;
 }
 
 .cart-float .badge {
   position: absolute;
-  top: -8px;
-  right: -8px;
-  background: var(--accent);
+  top: -10px;
+  right: -10px;
+  background: linear-gradient(135deg, var(--accent) 0%, #c0392b 100%);
   color: white;
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  font-size: 14px;
-  box-shadow: 0 4px 10px rgba(231, 76, 60, 0.4);
+  font-size: 16px;
+  box-shadow: 0 6px 15px rgba(233, 69, 96, 0.4);
+  border: 2px solid white;
 }
 
 /* Cart panel dengan desain mewah */
 .cart-panel {
   position: fixed;
-  right: 24px;
-  top: 130px;
-  width: 380px;
-  max-height: 72vh;
-  background: var(--card);
-  border-radius: 16px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+  right: 30px;
+  top: 150px;
+  width: 400px;
+  max-height: 80vh;
+  background: linear-gradient(135deg, var(--card) 0%, var(--light) 100%);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
   overflow: auto;
-  padding: 24px;
+  padding: 30px;
   z-index: 999;
   display: none;
-  border: 1px solid rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-top: 4px solid var(--gold);
 }
 
 .cart-panel h3 {
-  margin: 0 0 16px;
+  margin: 0 0 25px;
   color: var(--primary);
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   font-weight: 600;
-  border-bottom: 2px solid var(--primary);
-  padding-bottom: 12px;
+  font-family: 'Playfair Display', serif;
+  border-bottom: 2px solid var(--gold);
+  padding-bottom: 15px;
 }
 
 .cart-item {
   display: flex;
-  gap: 12px;
+  gap: 15px;
   align-items: center;
-  padding: 12px;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
+  padding: 15px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
   transition: background 0.2s ease;
 }
 
 .cart-item:hover {
-  background: rgba(44, 62, 80, 0.03);
+  background: rgba(26, 26, 46, 0.03);
 }
 
 .cart-item .name {
   flex: 1;
   font-weight: 500;
+  font-size: 1.1rem;
 }
 
 .cart-summary {
-  margin-top: 20px;
+  margin-top: 25px;
   text-align: right;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: var(--dark);
-  padding: 16px 0;
+  padding: 20px 0;
   border-top: 2px solid rgba(0,0,0,0.1);
+  font-family: 'Playfair Display', serif;
 }
 
 .cart-actions {
   display: flex;
-  gap: 12px;
-  margin-top: 16px;
+  gap: 15px;
+  margin-top: 20px;
 }
 
 .cart-actions button {
   flex: 1;
-  padding: 12px;
-  border-radius: 10px;
+  padding: 14px;
+  border-radius: 12px;
   border: none;
   cursor: pointer;
   font-weight: 700;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
+  font-size: 1.1rem;
 }
 
 .btn-checkout {
   background: linear-gradient(135deg, var(--accent) 0%, #c0392b 100%);
   color: white;
-  box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+  box-shadow: 0 6px 20px rgba(233, 69, 96, 0.3);
+  border: 2px solid transparent;
 }
 
 .btn-checkout:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(233, 69, 96, 0.4);
+  border-color: var(--gold);
 }
 
 .btn-clear {
@@ -320,79 +496,92 @@ div[style*="text-align:center;margin:10px 0"] {
 
 .btn-clear:hover {
   background: #e9ecef;
+  border-color: var(--gold);
 }
 
-/* Modal dengan desain elegan */
+/* Modal dengan desain ultra elegan */
 .modal-content {
-  background: var(--card);
+  background: linear-gradient(135deg, var(--card) 0%, var(--light) 100%);
   margin: 4% auto;
-  border-radius: 20px;
-  padding: 30px;
+  border-radius: 25px;
+  padding: 40px;
   width: 94%;
-  max-width: 560px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
-  border: 1px solid rgba(0,0,0,0.08);
+  max-width: 600px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-top: 4px solid var(--gold);
 }
 
 .close-button {
   float: right;
-  font-size: 24px;
+  font-size: 28px;
   color: var(--muted);
   cursor: pointer;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
+  font-weight: 300;
 }
 
 .close-button:hover {
   color: var(--dark);
+  transform: scale(1.2);
 }
 
 .form-row {
   display: flex;
-  gap: 12px;
+  gap: 15px;
   align-items: center;
-  margin-top: 16px;
+  margin-top: 20px;
 }
 
 .form-row input[type=number], .form-row input[type=text] {
-  padding: 12px;
+  padding: 14px;
+  border-radius: 12px;
   border: 1px solid #ced4da;
-  border-radius: 10px;
-  width: 200px;
-  font-size: 15px;
-  transition: border 0.2s ease;
+  width: 220px;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  font-family: 'Poppins', sans-serif;
 }
 
 .form-row input:focus {
   border-color: var(--primary);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.1);
+  box-shadow: 0 0 0 4px rgba(26, 26, 46, 0.1);
+  transform: translateY(-2px);
 }
 
 .small-btn {
-  background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   color: white;
   border: none;
-  padding: 10px 14px;
-  border-radius: 10px;
+  padding: 12px 18px;
+  border-radius: 12px;
   cursor: pointer;
   font-weight: 700;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
+  box-shadow: 0 6px 20px rgba(26, 26, 46, 0.3);
+  font-size: 1rem;
 }
 
 .small-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(26, 26, 46, 0.4);
+  border-color: var(--gold);
 }
 
 /* Tombol pengiriman dengan desain premium */
 .ship-btn {
-  padding: 10px 16px;
-  border-radius: 10px;
+  padding: 12px 20px;
+  border-radius: 12px;
   border: none;
   cursor: pointer;
   font-weight: 700;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: all 0.4s ease;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .ship-shopee {
@@ -416,298 +605,346 @@ div[style*="text-align:center;margin:10px 0"] {
 }
 
 .ship-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  border-color: var(--gold);
 }
 
 /* Footer note dengan desain elegan */
 .footer-note {
   font-size: 0.95rem;
   color: var(--muted);
-  margin-top: 16px;
+  margin-top: 20px;
   text-align: center;
   font-style: italic;
+  font-family: 'Playfair Display', serif;
 }
 
-/* Tombol kado dengan desain mewah */
+/* Tombol kado dengan desain ultra mewah */
 .gift-btn {
   position: fixed;
-  right: 24px;
-  top: 130px;
-  background: linear-gradient(135deg, var(--gold) 0%, #f1c40f 100%);
+  right: 30px;
+  top: 150px;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
   color: var(--dark);
   border: none;
-  padding: 12px 16px;
-  border-radius: 20px;
-  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+  padding: 15px 20px;
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
   cursor: pointer;
   font-weight: 800;
   z-index: 999;
   display: flex;
   align-items: center;
-  gap: 10px;
-  transition: all 0.3s ease;
-  border: 2px solid rgba(255,255,255,0.3);
+  gap: 12px;
+  transition: all 0.4s ease;
+  border: 3px solid rgba(255,255,255,0.3);
+  font-family: 'Playfair Display', serif;
 }
 
 .gift-btn:hover {
-  background: linear-gradient(135deg, #f1c40f 0%, #ffd700 100%);
-  transform: scale(1.05);
-  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+  background: linear-gradient(135deg, #fff 0%, var(--gold) 100%);
+  transform: scale(1.1) rotate(2deg);
+  box-shadow: 0 15px 40px rgba(212, 175, 55, 0.6);
+  border-color: var(--dark);
 }
 
 /* Event button dengan desain elegan */
 .event-btn {
   position: fixed;
-  right: 24px;
-  top: 190px;
+  right: 30px;
+  top: 220px;
   background: linear-gradient(135deg, var(--accent) 0%, #c0392b 100%);
   color: white;
   border: none;
-  padding: 12px 16px;
-  border-radius: 20px;
-  box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3);
+  padding: 15px 20px;
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(233, 69, 96, 0.4);
   cursor: pointer;
   font-weight: 800;
   z-index: 999;
   display: flex;
   align-items: center;
-  gap: 10px;
-  transition: all 0.3s ease;
+  gap: 12px;
+  transition: all 0.4s ease;
+  font-family: 'Playfair Display', serif;
 }
 
 .event-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 30px rgba(231, 76, 60, 0.4);
+  transform: scale(1.1);
+  box-shadow: 0 15px 40px rgba(233, 69, 96, 0.5);
 }
 
 /* Gift popup dengan desain mewah */
+.gift-popup {
+  display: none;
+  position: fixed;
+  left: 0; top: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  z-index: 10000;
+  animation: fadeIn 0.4s ease;
+}
+
 .gift-popup-content {
-  background: var(--card);
-  border-radius: 20px;
-  padding: 30px 24px;
+  background: linear-gradient(135deg, var(--card) 0%, var(--light) 100%);
+  border-radius: 25px;
+  padding: 40px;
   text-align: center;
   width: 90%;
-  max-width: 350px;
-  margin: 10% auto;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+  max-width: 400px;
+  margin: 15% auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
   border: 1px solid rgba(0,0,0,0.1);
+  border-top: 4px solid var(--gold);
+  animation: popIn 0.5s ease;
 }
 
 .gift-popup-content h2 {
   color: var(--accent);
-  margin-bottom: 16px;
-  font-size: 1.8rem;
+  margin-bottom: 20px;
+  font-size: 2.2rem;
+  font-family: 'Playfair Display', serif;
 }
 
 .gift-value {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 800;
   color: var(--gold);
-  margin-top: 20px;
-  text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+  margin-top: 25px;
+  text-shadow: 0 3px 15px rgba(212, 175, 55, 0.4);
+  font-family: 'Playfair Display', serif;
 }
 
 .gift-close {
   position: absolute;
-  right: 24px;
-  top: 16px;
-  font-size: 28px;
+  right: 30px;
+  top: 20px;
+  font-size: 32px;
   cursor: pointer;
   color: var(--muted);
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .gift-close:hover {
   color: var(--dark);
+  transform: scale(1.2);
 }
 
 /* Floating WA dengan desain premium */
-a[href*="wa.me"] img {
-  width: 72px;
-  height: 72px;
-  border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-  transition: transform 0.3s ease;
-  border: 3px solid rgba(255,255,255,0.2);
+.whatsapp-float {
+  position: fixed;
+  left: 30px;
+  bottom: 30px;
+  z-index: 999;
+  transition: all 0.3s ease;
 }
 
-a[href*="wa.me"] img:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+.whatsapp-float img {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  border: 4px solid rgba(255,255,255,0.2);
+}
+
+.whatsapp-float img:hover {
+  transform: translateY(-10px) scale(1.1);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
 }
 
 /* Form acara dengan desain mewah */
 #eventForm {
   margin-top: 80px;
-  padding: 60px 20px;
-  background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
-  border-top: 4px solid var(--primary);
+  padding: 80px 20px;
+  background: linear-gradient(180deg, var(--light) 0%, #ffffff 100%);
+  border-top: 4px solid var(--gold);
 }
 
 #eventForm h2 {
   text-align: center;
   color: var(--primary);
-  font-size: 1.8rem;
-  margin-bottom: 30px;
+  font-size: 2.2rem;
+  margin-bottom: 40px;
   font-weight: 700;
+  font-family: 'Playfair Display', serif;
 }
 
-#eventForm form {
-  background: var(--card);
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-  border: 1px solid rgba(0,0,0,0.05);
+.event-form-container {
+  background: linear-gradient(135deg, var(--card) 0%, var(--light) 100%);
+  padding: 40px;
+  border-radius: 25px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+  border: 1px solid rgba(0,0,0,0.08);
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 #eventForm input, #eventForm select, #eventForm textarea {
-  padding: 14px;
-  border-radius: 12px;
+  padding: 16px;
+  border-radius: 15px;
   border: 1px solid #ced4da;
   font-size: 16px;
   transition: all 0.2s ease;
+  font-family: 'Poppins', sans-serif;
 }
 
 #eventForm input:focus, #eventForm select:focus, #eventForm textarea:focus {
   border-color: var(--primary);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.1);
+  box-shadow: 0 0 0 4px rgba(26, 26, 46, 0.1);
+  transform: translateY(-2px);
 }
 
 #eventForm button[type="submit"] {
-  background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   color: white;
   border: none;
-  padding: 14px 28px;
-  border-radius: 12px;
+  padding: 16px 32px;
+  border-radius: 15px;
   font-size: 18px;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 6px 20px rgba(44, 62, 80, 0.2);
+  transition: all 0.4s ease;
+  box-shadow: 0 8px 25px rgba(26, 26, 46, 0.3);
+  font-family: 'Playfair Display', serif;
+  margin-top: 20px;
 }
 
 #eventForm button[type="submit"]:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(44, 62, 80, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 15px 40px rgba(26, 26, 46, 0.4);
+  border-color: var(--gold);
 }
 
 /* Bagian ulasan dengan desain elegan */
 #ulasan {
   margin-top: 80px;
-  padding: 60px 20px;
-  background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
-  border-top: 4px solid var(--primary);
+  padding: 80px 20px;
+  background: linear-gradient(180deg, #ffffff 0%, var(--light) 100%);
+  border-top: 4px solid var(--gold);
 }
 
 #ulasan h2 {
   text-align: center;
   color: var(--primary);
-  font-size: 1.8rem;
-  margin-bottom: 30px;
+  font-size: 2.2rem;
+  margin-bottom: 40px;
   font-weight: 700;
+  font-family: 'Playfair Display', serif;
 }
 
 #formUlasan {
-  background: var(--card);
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-  padding: 30px;
-  max-width: 550px;
-  margin: 0 auto 40px;
+  background: linear-gradient(135deg, var(--card) 0%, var(--light) 100%);
+  border-radius: 25px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+  padding: 40px;
+  max-width: 600px;
+  margin: 0 auto 50px;
+  border: 1px solid rgba(0,0,0,0.08);
 }
 
 #formUlasan input, #formUlasan textarea {
   width: 100%;
-  padding: 14px;
-  border-radius: 12px;
+  padding: 16px;
+  border-radius: 15px;
   border: 1px solid #ced4da;
   font-size: 16px;
   transition: all 0.2s ease;
+  font-family: 'Poppins', sans-serif;
 }
 
 #formUlasan input:focus, #formUlasan textarea:focus {
   border-color: var(--primary);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.1);
+  box-shadow: 0 0 0 4px rgba(26, 26, 46, 0.1);
+  transform: translateY(-2px);
 }
 
 #formUlasan button[type="submit"] {
-  background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   color: white;
   border: none;
-  padding: 14px 28px;
-  border-radius: 12px;
+  padding: 16px 32px;
+  border-radius: 15px;
   font-size: 18px;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 6px 20px rgba(44, 62, 80, 0.2);
+  transition: all 0.4s ease;
+  box-shadow: 0 8px 25px rgba(26, 26, 46, 0.3);
   width: 100%;
+  font-family: 'Playfair Display', serif;
 }
 
 #formUlasan button[type="submit"]:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(44, 62, 80, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 15px 40px rgba(26, 26, 46, 0.4);
+  border-color: var(--gold);
 }
 
 /* Kartu ulasan dengan desain mewah */
 .kartu-ulasan {
-  background: var(--card);
-  border-radius: 16px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-  padding: 24px;
-  border-left: 6px solid var(--primary);
+  background: linear-gradient(135deg, var(--card) 0%, var(--light) 100%);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  padding: 30px;
+  border-left: 8px solid var(--gold);
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(30px);
   animation: fadeInUp 0.6s ease forwards;
   border: 1px solid rgba(0,0,0,0.05);
   transition: all 0.3s ease;
+  margin-bottom: 30px;
 }
 
 .kartu-ulasan:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-  border-color: var(--primary);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+  border-color: var(--gold);
 }
 
 .kartu-ulasan strong {
   color: var(--primary);
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
+  font-family: 'Playfair Display', serif;
 }
 
 .kartu-ulasan p {
-  margin: 16px 0;
+  margin: 20px 0;
   color: #444;
-  line-height: 1.6;
-  font-size: 15px;
+  line-height: 1.7;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .kartu-ulasan small {
   color: #6c757d;
   font-size: 14px;
+  font-family: 'Poppins', sans-serif;
 }
 
 /* Download link dengan desain elegan */
-a[download] {
-  background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%);
+.download-link {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   color: white;
-  padding: 14px 28px;
-  border-radius: 12px;
+  padding: 16px 36px;
+  border-radius: 15px;
   text-decoration: none;
   font-weight: 700;
-  font-size: 16px;
-  display: inline-block;
-  margin: 30px 0;
-  transition: all 0.3s ease;
-  box-shadow: 0 6px 20px rgba(44, 62, 80, 0.2);
+  font-size: 18px;
+  margin: 40px 0;
+  transition: all 0.4s ease;
+  box-shadow: 0 8px 25px rgba(26, 26, 46, 0.3);
+  font-family: 'Playfair Display', serif;
+  border: 2px solid transparent;
 }
 
-a[download]:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(44, 62, 80, 0.3);
+.download-link:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 40px rgba(26, 26, 46, 0.4);
+  border-color: var(--gold);
 }
 
 /* Responsive improvements */
@@ -715,6 +952,7 @@ a[download]:hover {
   .brand {
     flex-direction: column;
     text-align: center;
+    gap: 20px;
   }
   
   .menu {
@@ -722,21 +960,21 @@ a[download]:hover {
   }
   
   .cart-panel {
-    right: 12px;
-    left: 12px;
+    right: 15px;
+    left: 15px;
     width: auto;
     top: auto;
-    bottom: 16px;
+    bottom: 20px;
   }
   
   .gift-btn {
-    right: 12px;
+    right: 15px;
     top: 120px;
   }
   
   .event-btn {
-    right: 12px;
-    top: 180px;
+    right: 15px;
+    top: 190px;
   }
   
   .form-row {
@@ -747,6 +985,16 @@ a[download]:hover {
   .form-row input[type=number], .form-row input[type=text] {
     width: 100%;
   }
+  
+  .whatsapp-float {
+    left: 15px;
+    bottom: 15px;
+  }
+  
+  .whatsapp-float img {
+    width: 70px;
+    height: 70px;
+  }
 }
 
 /* Animasi tambahan untuk interaktivitas */
@@ -756,10 +1004,48 @@ a[download]:hover {
   100% { transform: scale(1); }
 }
 
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
 .btn-checkout:active, .gift-btn:active, .event-btn:active {
   animation: pulse 0.3s ease;
 }
 
+/* Loading animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading {
+  border: 3px solid rgba(255,255,255,0.3);
+  border-top: 3px solid var(--gold);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+/* Scrollbar customization */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--light);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, var(--accent) 0%, #c0392b 100%);
+    }
   </style>
 </head>
 <body>
